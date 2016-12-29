@@ -1,0 +1,53 @@
+{
+  "invalidIds": [
+    false,
+    [
+    ],
+    {
+    },
+    "",
+    "1482981306438-0-5132-example-1ABC",
+    "1482981306438-0-5132-1a",
+    "9007199254740992-0-5132-example-1a",
+    "1482981306438-9007199254740992-5132-example-1a",
+    "1482981306438-0-9007199254740992-example-1a"
+  ],
+  "specs": [
+    "1a",
+    "1b"
+  ],
+  "validIds": {
+    "1482981306438-0-5132-example-1a": {
+      "name": "example",
+      "pid": 5132,
+      "sequence": 0,
+      "spec": "1a",
+      "timestamp": 1482981306438,
+      "valid": true
+    },
+    "1482981306438-0-5132-example-longer-name-1a": {
+      "name": "example-longer-name",
+      "pid": 5132,
+      "sequence": 0,
+      "spec": "1a",
+      "timestamp": 1482981306438,
+      "valid": true
+    },
+    "example-5132-1482981317498-0-1b": {
+      "name": "example",
+      "pid": 5132,
+      "sequence": 0,
+      "spec": "1b",
+      "timestamp": 1482981317498,
+      "valid": true
+    },
+    "example-longer-name-5132-1482981317498-0-1b": {
+      "name": "example-longer-name",
+      "pid": 5132,
+      "sequence": 0,
+      "spec": "1b",
+      "timestamp": 1482981317498,
+      "valid": true
+    }
+  }
+}

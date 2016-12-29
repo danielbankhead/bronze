@@ -1,27 +1,16 @@
 # Bronze
 ## Collision-resistant ids for distributed systems
 
-<!--
-
-// TODO: create tests
-  // spec should be a string and should not contain '-'
-  // node clusters should have different PIDs
-
-
-
-
-
-
-https://img.shields.io/badge/altusaero-bronze-05a.svg?style=flat-square
-
+<!-- TODO:
+[![Bronze by Altus Aero](https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square)](http://github.com/altusaero/) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 https://img.shields.io/npm/dt/bronze.svg?style=flat-square
 - npm downloads total
 
-https://img.shields.io/travis/altusaero/bronze.svg?style=flat-square
+https://img.shields.io/travis/altusaero/bronze.svg?style=flat-square&label=travis
 - travis build status
 
-https://img.shields.io/appveyor/ci/altusaero/bronze.svg?style=flat-square
+https://img.shields.io/appveyor/ci/altusaero/bronze.svg?style=flat-square&label=appveyor
 - appveyor build status
 
 https://img.shields.io/npm/v/bronze.svg?style=flat-square
@@ -42,32 +31,7 @@ https://img.shields.io/github/issues-pr/altusaero/bronze.svg?style=flat-square
 https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square
 - github contributors
 
-
-
-[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-
-
-
-
-
-https://img.shields.io/badge/<SUBJECT>-<STATUS>-<COLOR>.svg
-
-- brightgreen
-- green
-- yellowgreen
-- yellow
-- orange
-- red
-- lightgrey
-- blue
-- ff69b4
-- etc..
-
-
-
 -->
-
-
 
 ```js
 const Bronze = require('bronze')
@@ -112,20 +76,28 @@ A spec determines what goes into an id and how its information is sorted.
 ## Usage
 
 `Bronze` CLASS
-  _static_ _get_ `defaultName` STRING
+  - _static_ _get_ `defaultName` STRING
     - the default name for new instances (if not provided)
-  _static_ _get_ `defaultSpec` STRING
+
+  - _static_ _get_ `defaultSpec` STRING
     - the default spec for new instances
-  _static_ _get_ `specs` OBJECT
+
+  - _static_ _get_ `specs` OBJECT
     - the default name
-  _static_ `parse` (id)
+
+  - _static_ `parse` (id)
     - parses an id to JSON-compatible object
 
     - `id` STRING **required**
       - an id to parse
 
-  _new_ Bronze (options)
-    `options` OBJECT
+  - _new_ Bronze (options)
+    - Example:
+    ```js
+    const idGen = new Bronze({name: 'example', sequence: 1})
+    ```
+
+    - `options` OBJECT
       - `sequence` INT
         - the number of ids generated.
         - convenient for continuing creating ids where you left off (no pre-increment required)
@@ -145,38 +117,46 @@ A spec determines what goes into an id and how its information is sorted.
         - if invalid falls back to default
         - _default_ = _constructor_.defaultSpec
 
-    _instance_ OBJECT
-      `sequence` INT
+    - _instance_ OBJECT
+      - `sequence` INT
         - the current sequence
-      `pid` INT
+      - `pid` INT
         - the pid to
-      `name` STRING
+      - `name` STRING
         - the parsed name to be used in ids
-      `nameRaw` STRING
+      - `nameRaw` STRING
         - the raw, pre-parsed name
-      `spec` INT
+      - `spec` INT
 
-      `generate` (options)
+      - `generate` (options)
         - generates a new id
+        - Example:
+        ```js
+        const idGen = new Bronze()
+        const id = idGen.generate()
+        ```
 
-        `options` OBJECT
+        - `options` OBJECT
           - `json` BOOLEAN
             - returns results as JSON-compatible object
             - _default_ = false
 
-      `nextSequence` ()
+      - `nextSequence` ()
         - manually advances the sequence
+        - Example:
+        ```js
+        const idGen = new Bronze()
+        idGen.nextSequence()
+        ```
 
-See [examples](examples).
+<!-- TODO: See [examples](examples). -->
 
 
 ## Motivation
 
-While developing a distributed system we found the more machines we added the higher risk for collisions while using `UUID1` and `UUID4` to generate unique ids.
-
-The more machines we add, the more chances for collisions, no matter if we used `UUID1` or `UUID4`
-  - `UUID1` (timeuuids) can have collisions within 100ns, which can easily happen when migrating/importing data
-  - `UUID4` can have collisions at random and while the risk is small it can happen, a chance of data loss does not sit well with us.
+While developing a distributed system using `UUID1` and `UUID4` we found that we would run into collisions as we scaled.
+  - `UUID1` (timeuuids) can have collisions within 100ns, which can happen when migrating/importing data in bulk
+  - `UUID4` can have collisions at random. While the risk is reasonably small, a chance of data loss does not sit well with us.
 
 ### Goals
   - no collisions
@@ -198,7 +178,7 @@ The more machines we add, the more chances for collisions, no matter if we used 
   - Every machine in your distributed system should use a unique `name`. If every machine has a unique hostname (`process.env.HOSTNAME`) you should be fine.
   - To avoid collisions:
     - Do not reuse a `name` on a different machine within your distributed system's range of clock skew.
-    - Be mindful when changing a system's clock - if moving the clock back change temporarily change the `name`
+    - Be mindful when changing a system's clock - if moving the clock back temporarily change the `name`
     - Only one instance of Bronze should be created on a single process (`PID`) to avoid collisions.
       - Each worker spawned from Node's `cluster` module receives its own `PID` so no worries here.
   - Sequence counter resets after reaching `Number.MAX_SAFE_INTEGER` (9007199254740991)
@@ -215,6 +195,8 @@ The more machines we add, the more chances for collisions, no matter if we used 
     $ bronze -n 10
     # > returns 10 ids
     ```
+    <!-- TODO: { "bin" : { "bronze" : "./cli.js" } } -->
+    <!-- TODO: ~/.bronze/${PID} sequence stream? -->
 
   - Nested IDs
     ```js

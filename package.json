@@ -12,6 +12,7 @@
   "description": "Altus Aero Node.js HTTPS server",
   "devDependencies": {
     "nsp": "^2.6.2",
+    "pre-commit": "^1.2.2",
     "standard": "^8.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
@@ -36,8 +37,14 @@
   "license": "0BSD",
   "main": "index.js",
   "name": "bronze",
-  "private": false,
+  "pre-commit": {
+    "run": [
+      "test"
+    ],
+    "silent": false
+  },
   "preferGlobal": false,
+  "private": false,
   "repository": "altusaero/bronze",
   "scripts": {
     "lint": "standard",

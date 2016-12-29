@@ -1,0 +1,53 @@
+{
+  "author": "Altus Aero LLC <team@altusaero.com> (https://altusaero.com/)",
+  "bugs": {
+    "email": "team@altusaero.com",
+    "url": "https://github.com/altusaero/bronze/issues"
+  },
+  "contributors": [
+    "Daniel Bankhead <dan@danielbankhead.com> (https://danielbankhead.com/)"
+  ],
+  "dependencies": {
+  },
+  "description": "Altus Aero Node.js HTTPS server",
+  "devDependencies": {
+    "nsp": "^2.6.2",
+    "standard": "^8.0.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.0"
+  },
+  "engines": {
+    "node": ">=4.0.0",
+    "npm": ">=4.0.0"
+  },
+  "homepage": "https://github.com/altusaero/bronze",
+  "keywords": [
+    "bronze",
+    "uuid",
+    "uuid1",
+    "uuid4",
+    "timeuuid",
+    "guid",
+    "unique",
+    "id",
+    "ids",
+    "cassandra"
+  ],
+  "license": "0BSD",
+  "main": "index.js",
+  "name": "bronze",
+  "private": false,
+  "preferGlobal": false,
+  "repository": "altusaero/bronze",
+  "scripts": {
+    "lint": "standard",
+    "nsp": "nsp check",
+    "start": "node .",
+    "test": "npm run nsp && npm run lint && tape tests/*.js | tap-spec"
+  },
+  "standard": {
+    "ignore": [
+    ]
+  },
+  "version": "0.1.0"
+}

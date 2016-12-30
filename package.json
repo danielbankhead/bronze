@@ -33,7 +33,7 @@
     "ids",
     "cassandra"
   ],
-  "license": "0BSD",
+  "license": "Apache-2.0",
   "main": "index.js",
   "name": "bronze",
   "pre-commit": {

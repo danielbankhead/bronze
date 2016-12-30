@@ -1,31 +1,7 @@
 # Bronze
 ## Collision-resistant ids for distributed systems
 
-[![Bronze by Altus Aero](https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square)](http://github.com/altusaero/) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/) [![AppVeyor](https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/DanielBankhead/bronze) [![Travis CI](https://img.shields.io/travis/altusaero/bronze.svg?style=flat-square&label=travis)](https://travis-ci.org/AltusAero/bronze)
-
-[![GitHub - Issues Open](https://img.shields.io/github/issues/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
-
-[![GitHub - Pull Requests Open](https://img.shields.io/github/issues-pr/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
-
-[![GitHub - Contributors](https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
-
-
-<!-- TODO:
-
-
-https://img.shields.io/npm/dt/bronze.svg?style=flat-square
-- npm downloads total
-
-https://img.shields.io/npm/v/bronze.svg?style=flat-square
-- npm version
-
-https://img.shields.io/npm/l/bronze.svg?style=flat-square
-- npm license
-
-  - https://img.shields.io/github/license/altusaero/bronze.svg?style=flat-square
-  - github license
-
--->
+[![Bronze by Altus Aero](https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square)](http://github.com/altusaero/) [![bronze - npm version](https://img.shields.io/npm/v/bronze.svg?style=flat-square)](http://npm.com/package/bronze/) [![bronze - npm total downloads](https://img.shields.io/npm/dt/bronze.svg?style=flat-square)](http://npm.com/package/bronze/) [![bronze - npm license](https://img.shields.io/npm/l/bronze.svg?style=flat-square)](http://npm.com/package/bronze/) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/) [![AppVeyor](https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/DanielBankhead/bronze) [![Travis CI](https://img.shields.io/travis/AltusAero/bronze.svg?style=flat-square&label=travis)](https://travis-ci.org/AltusAero/bronze) [![GitHub - Issues Open](https://img.shields.io/github/issues/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze) [![GitHub - Pull Requests Open](https://img.shields.io/github/issues-pr/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze) [![GitHub - Contributors](https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
 
 ```js
 const Bronze = require('bronze')
@@ -115,12 +91,13 @@ A spec determines what goes into an id and how its information is sorted.
       - `sequence` INT
         - the current sequence
       - `pid` INT
-        - the pid to
+        - the pid in use
       - `name` STRING
         - the parsed name to be used in ids
       - `nameRaw` STRING
         - the raw, pre-parsed name
-      - `spec` INT
+      - `spec` STRING
+        - the spec in use
 
       - `generate` (options)
         - generates a new id
@@ -128,6 +105,7 @@ A spec determines what goes into an id and how its information is sorted.
         ```js
         const idGen = new Bronze()
         const id = idGen.generate()
+        // > 1482810226160-0-14210-localhost-1a
         ```
 
         - `options` OBJECT

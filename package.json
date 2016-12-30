@@ -9,7 +9,7 @@
   ],
   "dependencies": {
   },
-  "description": "Altus Aero Node.js HTTPS server",
+  "description": "Collision-resistant ids for distributed systems",
   "devDependencies": {
     "nsp": "^2.6.2",
     "pre-commit": "^1.2.2",

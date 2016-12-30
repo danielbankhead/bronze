@@ -2,7 +2,9 @@
 'use strict'
 
 class Bronze {
-  constructor (options = {}) {
+  constructor (options) {
+    options = Object.assign({}, options)
+
     if (Number.isSafeInteger(options.sequence) === true) {
       this.sequence = options.sequence
     } else {
@@ -41,7 +43,7 @@ class Bronze {
     }
   }
 
-  generate (options = {}) {
+  generate (options) {
     const results = {
       timestamp: Date.now(),
       sequence: this.sequence,
@@ -49,6 +51,8 @@ class Bronze {
       name: this.name,
       spec: this.spec
     }
+
+    options = Object.assign({}, options)
 
     this.nextSequence()
 

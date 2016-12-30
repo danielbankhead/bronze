@@ -1,17 +1,20 @@
 # Bronze
 ## Collision-resistant ids for distributed systems
 
+[![Bronze by Altus Aero](https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square)](http://github.com/altusaero/) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/) [![AppVeyor](https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/DanielBankhead/bronze) [![Travis CI](https://img.shields.io/travis/altusaero/bronze.svg?style=flat-square&label=travis)](https://travis-ci.org/AltusAero/bronze)
+
+[![GitHub - Issues Open](https://img.shields.io/github/issues/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
+
+[![GitHub - Pull Requests Open](https://img.shields.io/github/issues-pr/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
+
+[![GitHub - Contributors](https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
+
+
 <!-- TODO:
-[![Bronze by Altus Aero](https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square)](http://github.com/altusaero/) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+
 
 https://img.shields.io/npm/dt/bronze.svg?style=flat-square
 - npm downloads total
-
-https://img.shields.io/travis/altusaero/bronze.svg?style=flat-square&label=travis
-- travis build status
-
-https://img.shields.io/appveyor/ci/altusaero/bronze.svg?style=flat-square&label=appveyor
-- appveyor build status
 
 https://img.shields.io/npm/v/bronze.svg?style=flat-square
 - npm version
@@ -21,15 +24,6 @@ https://img.shields.io/npm/l/bronze.svg?style=flat-square
 
   - https://img.shields.io/github/license/altusaero/bronze.svg?style=flat-square
   - github license
-
-https://img.shields.io/github/issues/altusaero/bronze.svg?style=flat-square
-- github issues open
-
-https://img.shields.io/github/issues-pr/altusaero/bronze.svg?style=flat-square
-- github pull requests open
-
-https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square
-- github contributors
 
 -->
 
@@ -149,7 +143,9 @@ A spec determines what goes into an id and how its information is sorted.
         idGen.nextSequence()
         ```
 
-<!-- TODO: See [examples](examples). -->
+<!-- TODO:
+  See [examples](examples).
+-->
 
 
 ## Motivation

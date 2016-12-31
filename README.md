@@ -1,7 +1,29 @@
 # Bronze
 ## Collision-resistant ids for distributed systems
 
-[![Bronze by Altus Aero](https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square)](http://github.com/altusaero/) [![bronze - npm version](https://img.shields.io/npm/v/bronze.svg?style=flat-square)](http://npm.com/package/bronze/) [![bronze - npm total downloads](https://img.shields.io/npm/dt/bronze.svg?style=flat-square)](http://npm.com/package/bronze/) [![bronze - npm license](https://img.shields.io/npm/l/bronze.svg?style=flat-square)](http://npm.com/package/bronze/) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/) [![AppVeyor](https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/DanielBankhead/bronze) [![Travis CI](https://img.shields.io/travis/AltusAero/bronze.svg?style=flat-square&label=travis)](https://travis-ci.org/AltusAero/bronze) [![GitHub - Issues Open](https://img.shields.io/github/issues/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze) [![GitHub - Pull Requests Open](https://img.shields.io/github/issues-pr/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze) [![GitHub - Contributors](https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square)](https://travis-ci.org/AltusAero/bronze)
+[![Bronze by Altus Aero][shield-io-altusaero-bronze]][altusaero-github] [![bronze - npm version][shield-io-npm-version]][npm-bronze] [![bronze - npm total downloads][shield-io-npm-total-downloads]][npm-bronze] [![bronze - npm license][shield-io-npm-license]][npm-bronze] [![AppVeyor][shield-io-AppVeyor]][appveyor-bronze] [![Travis CI][shield-io-Travis-CI]][travis-bronze] [![GitHub - Issues Open][shield-io-GitHub-Issues-Open]][github-bronze-issues] [![GitHub - Pull Requests Open][shield-io-GitHub-Pull-Requests-Open]][github-bronze-pulls] [![GitHub - Contributors][shield-io-GitHub-Contributors]][github-bronze-graphs-contributors] [![Standard - JavaScript Style Guide][shield-io-standard-style]][standardjs]
+
+[shield-io-altusaero-bronze]: https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square
+[shield-io-npm-version]: https://img.shields.io/npm/v/bronze.svg?style=flat-square
+[shield-io-npm-total-downloads]: https://img.shields.io/npm/dt/bronze.svg?style=flat-square
+[shield-io-npm-license]: https://img.shields.io/npm/l/bronze.svg?style=flat-square
+[shield-io-AppVeyor]: https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor
+[shield-io-Travis-CI]: https://img.shields.io/travis/AltusAero/bronze.svg?style=flat-square&label=travis
+[shield-io-GitHub-Issues-Open]: https://img.shields.io/github/issues-raw/altusaero/bronze.svg?style=flat-square
+[shield-io-GitHub-Pull-Requests-Open]: https://img.shields.io/github/issues-pr-raw/altusaero/bronze.svg?style=flat-square
+[shield-io-GitHub-Contributors]: https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square
+[shield-io-standard-style]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
+
+[altusaero-github]: https://github.com/altusaero/
+[npm-bronze]: https://npmjs.com/package/bronze/
+[appveyor-bronze]: https://ci.appveyor.com/project/DanielBankhead/bronze
+[travis-bronze]: https://travis-ci.org/AltusAero/bronze
+[github-bronze-issues]: https://github.com/AltusAero/bronze/issues
+[github-bronze-pulls]: https://github.com/AltusAero/bronze/pulls
+[github-bronze-graphs-contributors]: https://github.com/AltusAero/bronze/graphs/contributors
+[standardjs]: http://standardjs.com/
+
+
 
 ```js
 const Bronze = require('bronze')
@@ -27,7 +49,21 @@ $ npm install bronze --save
 - collision resistant - safely generate up to **9,007,199,254,740,991** ids generated within a single millisecond
 - fast - can generate an id in less than .05ms - _even on old hardware_
 - can be conveniently sorted by `timestamp` or `name`
-- `0BSD` - BSD Zero Clause License
+
+
+## Quick Start
+
+```js
+const Bronze = require('bronze')
+const idGen = new Bronze()
+
+idGen.generate()
+// > 1483113483923-0-12179-localhost-1a
+idGen.generate()
+// > 1483113483923-1-12179-localhost-1a
+
+// continue to create ids throughout your code
+```
 
 
 ## Specs

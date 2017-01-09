@@ -11,12 +11,12 @@ class Bronze {
       this.sequence = 0
     }
 
+    this.pid = 0
+
     if (Number.isSafeInteger(options.pid) === true) {
       this.pid = options.pid
     } else if (Number.isSafeInteger(process.pid)) {
       this.pid = process.pid
-    } else {
-      this.pid = 0
     }
 
     if (typeof options.name === 'string') {

@@ -2,21 +2,16 @@
 
 ## General
 
+- Search before filing an issue or pull request
+- Feel free to take a try at [FUTURE.md](FUTURE.md)
+- Create tests and benchmarks for new features.
+  - If you need help we can work through this during the PR process, but it will take additional time.
 - Run tests before making proposed changes (we use [pre-commit](https://www.npmjs.com/package/pre-commit) to automate this step)
-- Create tests for new features
 - You must agree to the [Developer's Certificate of Origin](http://developercertificate.org) (found below).
 
 ## Style Guide
 
 JavaScript: [JavaScript Standard Style](http://standardjs.com)
-
-## Found an Issue?
-
-File it.
-
-## Have a Question?
-
-Ask it.
 
 ## Code of Conduct
 

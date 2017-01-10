@@ -1,7 +1,7 @@
 # Bronze
 ## Collision-resistant ids for distributed systems
 
-[![Bronze by Altus Aero][shield-io-altusaero-bronze]][altusaero-github] [![bronze - npm version][shield-io-npm-version]][npm-bronze] [![bronze - npm total downloads][shield-io-npm-total-downloads]][npm-bronze] [![bronze - npm license][shield-io-npm-license]][npm-bronze] [![AppVeyor][shield-io-AppVeyor]][appveyor-bronze] [![Travis CI][shield-io-Travis-CI]][travis-bronze] [![GitHub - Issues Open][shield-io-GitHub-Issues-Open]][github-bronze-issues] [![GitHub - Pull Requests Open][shield-io-GitHub-Pull-Requests-Open]][github-bronze-pulls] [![GitHub - Contributors][shield-io-GitHub-Contributors]][github-bronze-graphs-contributors] [![Standard - JavaScript Style Guide][shield-io-standard-style]][standardjs]
+[![Bronze by Altus Aero][shield-io-altusaero-bronze]][altusaero-github] [![bronze - npm version][shield-io-npm-version]][npm-bronze] [![bronze - npm total downloads][shield-io-npm-total-downloads]][npm-bronze] [![bronze - npm license][shield-io-npm-license]][npm-bronze] [![AppVeyor][shield-io-AppVeyor]][appveyor-bronze] [![Travis CI][shield-io-Travis-CI]][travis-bronze] [![Travis CI][shield-io-Coveralls]][coveralls-bronze] [![GitHub - Issues Open][shield-io-GitHub-Issues-Open]][github-bronze-issues] [![GitHub - Pull Requests Open][shield-io-GitHub-Pull-Requests-Open]][github-bronze-pulls] [![GitHub - Contributors][shield-io-GitHub-Contributors]][github-bronze-graphs-contributors] [![Standard - JavaScript Style Guide][shield-io-standard-style]][standardjs]
 
 [shield-io-altusaero-bronze]: https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square
 [shield-io-npm-version]: https://img.shields.io/npm/v/bronze.svg?style=flat-square
@@ -9,6 +9,7 @@
 [shield-io-npm-license]: https://img.shields.io/npm/l/bronze.svg?style=flat-square
 [shield-io-AppVeyor]: https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor
 [shield-io-Travis-CI]: https://img.shields.io/travis/AltusAero/bronze.svg?style=flat-square&label=travis
+[shield-io-Coveralls]: https://img.shields.io/coveralls/AltusAero/bronze.svg?style=flat-square
 [shield-io-GitHub-Issues-Open]: https://img.shields.io/github/issues-raw/altusaero/bronze.svg?style=flat-square
 [shield-io-GitHub-Pull-Requests-Open]: https://img.shields.io/github/issues-pr-raw/altusaero/bronze.svg?style=flat-square
 [shield-io-GitHub-Contributors]: https://img.shields.io/github/contributors/altusaero/bronze.svg?style=flat-square
@@ -18,6 +19,7 @@
 [npm-bronze]: https://npmjs.com/package/bronze/
 [appveyor-bronze]: https://ci.appveyor.com/project/DanielBankhead/bronze
 [travis-bronze]: https://travis-ci.org/AltusAero/bronze
+[coveralls-bronze]: https://coveralls.io/github/AltusAero/bronze
 [github-bronze-issues]: https://github.com/AltusAero/bronze/issues
 [github-bronze-pulls]: https://github.com/AltusAero/bronze/pulls
 [github-bronze-graphs-contributors]: https://github.com/AltusAero/bronze/graphs/contributors
@@ -232,3 +234,5 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
     ```
     - the issue the moment is the possibility of collisions (no unique name)
     - would be pretty cool - imagine the convenience of nesting a video_id into a comment_id
+
+  - See more in [FUTURE.md](FUTURE.md)

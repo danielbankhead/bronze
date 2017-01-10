@@ -7,8 +7,7 @@
   "contributors": [
     "Daniel Bankhead <dan@danielbankhead.com> (https://danielbankhead.com/)"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "description": "Collision-resistant ids for distributed systems",
   "devDependencies": {
     "coveralls": "^2.11.15",
@@ -77,8 +76,7 @@
     "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape"
   },
   "standard": {
-    "ignore": [
-    ]
+    "ignore": []
   },
-  "version": "0.2.0"
+  "version": "0.2.1"
 }

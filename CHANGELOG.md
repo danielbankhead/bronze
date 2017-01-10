@@ -1,3 +1,45 @@
+## [0.2.1]
+
+- ### Added coverage support, FUTURE.md, and auto-changelog scripts
+  - 08d36863316a9c16b48dde3248c4c2eba53d4abd
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-10 00:55:40 -0500
+
+- ### Simplified and cleaned up
+  - a6194ba7aa85de324819525719b822c2a09096bb
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-10 00:50:18 -0500
+
+- ### Added coveralls and FUTURE.md
+  - 7b5fef3a464c11f8ff07283d3ee56367aa25c534
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-09 20:01:45 -0500
+
+- ### Added `coveralls` and `nyc`
+  - f4264840b22f1a16a5ec9afd4bd61fe4e7e1d77c
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-09 19:57:39 -0500
+
+- ### Fix for coverage
+  - 62fa34434874371a25a58ef4b2b7d1f62e6173cc
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-09 18:23:16 -0500
+
+- ### Created templates for issues and pull requests
+  - 5ef006585068c1748f2b04c2d06017c01d9011b5
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-09 17:47:07 -0500
+
+- ### Apache License 2.0
+  - b930c8de80e61d22d43653c9e4ee064dc0d24bd6
+  - Author: **Daniel Bankhead**
+  - Date: 2016-12-30 20:56:21 -0500
+
+- ### Update LICENSE
+  - baf4ba5db1128c676b8549b7473305cfec488aff
+  - Author: **Daniel Bankhead**
+  - Date: 2016-12-30 20:51:37 -0500
+
 ## [0.2.0]
 
 - ### Updated license, added CONTRIBUTING.md, and updated README

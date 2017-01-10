@@ -42,7 +42,8 @@
   "nyc": {
     "branches": 100,
     "exclude": [
-      "benchmark"
+      "benchmark",
+      "dev"
     ],
     "functions": 100,
     "include": [
@@ -68,6 +69,9 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard",
     "nsp": "nsp check",
+    "postversion": "git push && git push --tags",
+    "version": "node dev/changelog-version",
+    "preversion": "node dev/changelog-preversion",
     "start": "node .",
     "tape": "tape \"tests/*.js\" | tap-spec",
     "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape"

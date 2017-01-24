@@ -4,12 +4,10 @@
 .*.swp
 .DS_Store
 ._*
-.enc-keys.json
 .env
 .git
 .grunt
 .hg
-.lastEBSBackupID
 .lock-wscript
 .node_repl_history
 .npm

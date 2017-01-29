@@ -2,7 +2,7 @@
 'use strict'
 
 const Bronze = require('../')
-const config = require('./config')
+const config = require('../data/tests/config')
 const tape = require('tape')
 
 tape('instance', (t) => {

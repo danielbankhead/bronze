@@ -7,7 +7,8 @@
   "contributors": [
     "Daniel Bankhead <dan@danielbankhead.com> (https://danielbankhead.com/)"
   ],
-  "dependencies": {},
+  "dependencies": {
+  },
   "description": "Collision-resistant ids for distributed systems",
   "devDependencies": {
     "coveralls": "^2.11.15",
@@ -69,14 +70,15 @@
     "lint": "standard",
     "nsp": "nsp check",
     "postversion": "git push && git push --tags",
-    "version": "node dev/changelog-version",
     "preversion": "node dev/changelog-preversion",
     "start": "node .",
     "tape": "tape \"tests/*.js\" | tap-spec",
-    "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape"
+    "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape",
+    "version": "node dev/changelog-version"
   },
   "standard": {
-    "ignore": []
+    "ignore": [
+    ]
   },
   "version": "0.2.1"
 }

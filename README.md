@@ -1,9 +1,9 @@
 # Bronze
 ## Collision-resistant ids for distributed systems
 
-[![Bronze by Altus Aero][shield-io-altusaero-bronze]][altusaero-github] [![bronze - npm version][shield-io-npm-version]][npm-bronze] [![bronze - npm total downloads][shield-io-npm-total-downloads]][npm-bronze] [![bronze - npm license][shield-io-npm-license]][npm-bronze] [![AppVeyor][shield-io-AppVeyor]][appveyor-bronze] [![Travis CI][shield-io-Travis-CI]][travis-bronze] [![Travis CI][shield-io-Coveralls]][coveralls-bronze] [![GitHub - Issues Open][shield-io-GitHub-Issues-Open]][github-bronze-issues] [![GitHub - Pull Requests Open][shield-io-GitHub-Pull-Requests-Open]][github-bronze-pulls] [![GitHub - Contributors][shield-io-GitHub-Contributors]][github-bronze-graphs-contributors] [![Standard - JavaScript Style Guide][shield-io-standard-style]][standardjs]
+[![Bronze by Altus Aero][shield-io-altusaero]][altusaero-github] [![npm version][shield-io-npm-version]][npm] [![npm total downloads][shield-io-npm-total-downloads]][npm] [![npm license][shield-io-npm-license]][npm] [![AppVeyor][shield-io-AppVeyor]][appveyor] [![Travis CI][shield-io-Travis-CI]][travis] [![Travis CI][shield-io-Coveralls]][coveralls] [![GitHub - Issues Open][shield-io-GitHub-Issues-Open]][github-issues] [![GitHub - Pull Requests Open][shield-io-GitHub-Pull-Requests-Open]][github-pulls] [![GitHub - Contributors][shield-io-GitHub-Contributors]][github-graphs-contributors] [![Standard - JavaScript Style Guide][shield-io-standard-style]][standardjs]
 
-[shield-io-altusaero-bronze]: https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square
+[shield-io-altusaero]: https://img.shields.io/badge/altusaero-bronze-C9AE5D.svg?style=flat-square
 [shield-io-npm-version]: https://img.shields.io/npm/v/bronze.svg?style=flat-square
 [shield-io-npm-total-downloads]: https://img.shields.io/npm/dt/bronze.svg?style=flat-square
 [shield-io-npm-license]: https://img.shields.io/npm/l/bronze.svg?style=flat-square
@@ -16,13 +16,13 @@
 [shield-io-standard-style]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 
 [altusaero-github]: https://github.com/altusaero/
-[npm-bronze]: https://npmjs.com/package/bronze/
-[appveyor-bronze]: https://ci.appveyor.com/project/DanielBankhead/bronze
-[travis-bronze]: https://travis-ci.org/AltusAero/bronze
-[coveralls-bronze]: https://coveralls.io/github/AltusAero/bronze
-[github-bronze-issues]: https://github.com/AltusAero/bronze/issues
-[github-bronze-pulls]: https://github.com/AltusAero/bronze/pulls
-[github-bronze-graphs-contributors]: https://github.com/AltusAero/bronze/graphs/contributors
+[npm]: https://npmjs.com/package/bronze/
+[appveyor]: https://ci.appveyor.com/project/DanielBankhead/bronze
+[travis]: https://travis-ci.org/AltusAero/bronze
+[coveralls]: https://coveralls.io/github/AltusAero/bronze
+[github-issues]: https://github.com/AltusAero/bronze/issues
+[github-pulls]: https://github.com/AltusAero/bronze/pulls
+[github-graphs-contributors]: https://github.com/AltusAero/bronze/graphs/contributors
 [standardjs]: http://standardjs.com/
 
 

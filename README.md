@@ -106,12 +106,12 @@ A spec determines what goes into an id and how its information is sorted.
     ```
 
     - `options` OBJECT
-      - `sequence` INT
+      - `sequence` INTEGER
         - the number of ids generated.
         - convenient for continuing creating ids where you left off (no pre-increment required)
         - if invalid falls back to default
         - _default_ = 0
-      - `pid` INT
+      - `pid` INTEGER
         - a process id to number to use for generated ids
         - if invalid falls back to default
         - _default_ = process.pid, else 0
@@ -126,9 +126,9 @@ A spec determines what goes into an id and how its information is sorted.
         - _default_ = _constructor_.defaultSpec
 
     - _instance_ OBJECT
-      - `sequence` INT
+      - `sequence` INTEGER
         - the current sequence
-      - `pid` INT
+      - `pid` INTEGER
         - the pid in use
       - `name` STRING
         - the parsed name to be used in ids
@@ -137,7 +137,7 @@ A spec determines what goes into an id and how its information is sorted.
       - `spec` STRING
         - the spec in use
 
-      - `generate` (options)
+      - `generate` ([options])
         - generates a new id
         - Example:
         ```js
@@ -146,10 +146,14 @@ A spec determines what goes into an id and how its information is sorted.
         // > 1482810226160-0-14210-localhost-1a
         ```
 
-        - `options` OBJECT
+        - `options` OBJECT _optional_
           - `json` BOOLEAN
-            - returns results as JSON-compatible object
+            - returns results as JSON-compatible object instead of STRING
             - _default_ = false
+
+        - _return_ id STRING | OBJECT
+          - The generated id
+          - returns an object if `options.json === true`
 
       - `nextSequence` ()
         - manually advances the sequence
@@ -170,7 +174,7 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
   - `UUID1` (timeuuids) can have collisions within 100ns, which can happen when migrating/importing data in bulk
   - `UUID4` can have collisions at random. While the risk is reasonably small, a chance of data loss does not sit well with us.
 
-### Goals
+## Goals
   - no collisions
     - remove 'randomness' as an element for unique identifiers, which have the possibility of collisions
     - predictability > random/entropy

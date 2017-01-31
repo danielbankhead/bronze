@@ -1,3 +1,25 @@
+## [0.2.2]
+
+- ### Cleaned up documentation
+  - 91ce47f41a89c01044a2062a4c2ec404fff29b01
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-30 21:51:16 -0500
+
+- ### Make badges more portable for future projects
+  - b61a1c8194bd1970aa35f8ccd889f7da3b28e6da
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-29 17:36:29 -0500
+
+- ### Move tests/config.json to data/tests/config.json
+  - d74fd58bc7018c025474925d079c6c3e34ef9f11
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-29 14:31:36 -0500
+
+- ### Updated .gitignore
+  - f5ae6b65d57a2935da440990bb8a9a676983d977
+  - Author: **Daniel Bankhead**
+  - Date: 2017-01-24 17:29:32 -0500
+
 ## [0.2.1]
 
 - ### Added coverage support, FUTURE.md, and auto-changelog scripts

@@ -7,8 +7,7 @@
   "contributors": [
     "Daniel Bankhead <dan@danielbankhead.com> (https://danielbankhead.com/)"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "description": "Collision-resistant ids for distributed systems",
   "devDependencies": {
     "coveralls": "^2.11.15",
@@ -77,8 +76,7 @@
     "version": "node dev/changelog-version"
   },
   "standard": {
-    "ignore": [
-    ]
+    "ignore": []
   },
-  "version": "0.2.1"
+  "version": "0.2.2"
 }

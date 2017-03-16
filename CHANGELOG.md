@@ -1,3 +1,15 @@
+## [0.2.3]
+
+- ### Updated dev dependencies
+  - 61575a2a391556d379908a16786ddb14cc33d855
+  - Author: **Daniel Bankhead**
+  - Date: 2017-03-15 21:21:56 -0400
+
+- ### Performance & Readability > Benchmarks
+  - 00ec02ff43d4600b69a4bfc5fa301f12edc88879
+  - Author: **Daniel Bankhead**
+  - Date: 2017-03-15 21:14:45 -0400
+
 ## [0.2.2]
 
 - ### Cleaned up documentation

@@ -46,9 +46,9 @@ $ npm install bronze --save
 
 ## Features
 
-- designed for distributed and independent systems
+- designed for distributed and singleton systems
 - no time-based (`UUID1`) or random (`UUID4`) collisions
-- collision resistant - safely generate up to **9,007,199,254,740,991** ids generated within a single millisecond
+- collision resistant - safely generate up to **9,007,199,254,740,991** ids within a single millisecond
 - fast - can generate an id in less than .05ms - _even on old hardware_
 - can be conveniently sorted by `timestamp` or `name`
 
@@ -197,9 +197,9 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
     - Be mindful when changing a system's clock - if moving the clock back temporarily change the `name`
     - Only one instance of Bronze should be created on a single process (`PID`) to avoid collisions.
       - Each worker spawned from Node's `cluster` module receives its own `PID` so no worries here.
-  - Sequence counter resets after reaching `Number.MAX_SAFE_INTEGER` (9007199254740991)
+  - Sequence counter automatically resets after reaching `Number.MAX_SAFE_INTEGER` (9007199254740991)
   - Without string parsing, timestamp sorting (`spec 1a`) is supported up to `2286-11-20T17:46:39.999Z` (9999999999999)
-  - Using with databases:
+  - Using with databases, such as Cassandra:
     - most `text` data types should do the trick
 
 

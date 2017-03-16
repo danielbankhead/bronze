@@ -41,7 +41,6 @@
   "nyc": {
     "branches": 100,
     "exclude": [
-      "benchmark",
       "dev"
     ],
     "functions": 100,

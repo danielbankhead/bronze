@@ -4,8 +4,12 @@
 
 - Search before filing an issue or pull request
 - Feel free to take a try at [FUTURE.md](FUTURE.md)
-- Create tests and benchmarks for new features.
+- Create tests for new features.
   - If you need help we can work through this during the PR process, but it will take additional time.
+- When it comes to performance vs readability the following order is preferred:
+  - performance gains greater than 5%
+  - code readability
+  - performance gains less than 5%
 - Run tests before making proposed changes (we use [pre-commit](https://www.npmjs.com/package/pre-commit) to automate this step)
 - You must agree to the [Developer's Certificate of Origin](http://developercertificate.org) (found below).
 

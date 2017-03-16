@@ -10,11 +10,11 @@
   "dependencies": {},
   "description": "Collision-resistant ids for distributed systems",
   "devDependencies": {
-    "coveralls": "^2.11.15",
-    "nsp": "^2.6.2",
-    "nyc": "^10.0.0",
+    "coveralls": "^2.12.0",
+    "nsp": "^2.6.3",
+    "nyc": "^10.1.2",
     "pre-commit": "^1.2.2",
-    "standard": "^8.0.0",
+    "standard": "^9.0.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
   },

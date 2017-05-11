@@ -1,3 +1,15 @@
+## [0.3.0]
+
+- ### bump standard
+  - d26ed3dee043b80093b965a7bcd682a73bee7b41
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-10 21:47:27 -0400
+
+- ### Slashes should invalidate ids for specs 1a and 1b
+  - ddd1bbceb5fcd27c49fe9f6b4d5d7acb067e679e
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-10 21:44:32 -0400
+
 ## [0.2.3]
 
 - ### Updated dev dependencies

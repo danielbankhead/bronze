@@ -111,12 +111,20 @@ class Bronze {
         sequence = Number(pieces[1])
         pid = Number(pieces[2])
         name = pieces.slice(3, pieces.length - 1).join('-')
+
+        if (/[\\/]/.test(name)) {
+          return results
+        }
         break
       case '1b':
         sequence = Number(pieces[pieces.length - 2])
         timestamp = Number(pieces[pieces.length - 3])
         pid = Number(pieces[pieces.length - 4])
         name = pieces.slice(0, -4).join('-')
+
+        if (/[\\/]/.test(name)) {
+          return results
+        }
         break
       default:
         return results

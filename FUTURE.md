@@ -11,7 +11,10 @@
 
   - Nested IDs
     ```js
-    const id1 = idGen.generate({name: 'example'})
+    const Bronze = require('bronze')
+    const idGen = new Bronze({name: 'example'})
+
+    const id1 = idGen.generate()
     console.log(id1)
     // > 1482810226160-0-14210-example-1a
 

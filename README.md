@@ -200,7 +200,7 @@ Options:
   --sequence-dir STRING   Set the sequence directory
                           Will attempt to create if not exist
   --sequence-reset        Sets the sequence back to 0
-                          Nothing happens if file doesn't exist
+                          File isn't created if it doesn't exist
 
   --help, -h
   --version, -v

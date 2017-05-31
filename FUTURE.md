@@ -1,14 +1,4 @@
 ## Future
-  - CLI
-    ```sh
-    $ bronze
-    # > returns an id
-    $ bronze -n 10
-    # > returns 10 ids
-    ```
-    <!-- TODO: { "bin" : { "bronze" : "./cli.js" } } -->
-    <!-- TODO: ~/.bronze/${PID} sequence stream? -->
-
   - Nested IDs
     ```js
     const Bronze = require('bronze')

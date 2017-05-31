@@ -33,14 +33,24 @@ const Bronze = require('bronze')
 const idGen = new Bronze({name: 'example'})
 
 const id = idGen.generate()
-// > 1482810226160-0-14210-example-1a
+// 1482810226160-0-14210-example-1a
+```
+
+```sh
+$ bronze --name example
+# 1496196550327-31-7887-example-1a
 ```
 
 
 ## Installation
 
 ```sh
-$ npm install bronze --save
+$ npm install bronze
+```
+
+CLI only:
+```sh
+$ [sudo] npm install bronze -g
 ```
 
 
@@ -51,6 +61,8 @@ $ npm install bronze --save
 - collision resistant - safely generate up to **9,007,199,254,740,991** ids within a single millisecond
 - fast - can generate an id in less than .05ms - _even on old hardware_
 - can be conveniently sorted by `timestamp` or `name`
+- can be used as a module or via CLI
+- supports Node.js 4+
 
 
 ## Quick Start
@@ -166,6 +178,33 @@ A spec determines what goes into an id and how its information is sorted.
 <!-- TODO:
   See [examples](examples).
 -->
+## CLI Usage
+
+The CLI uses the module under the hood.
+
+```
+Usage: bronze [options]
+
+Options:
+  --sequence INT    Set the counter for the number of ids generated
+                    By default will use sequence file (sequence path)
+                    If this option is used sequence file will not be updated
+  --pid INT         Set the process id for generated ids
+  --name STRING     A unique name for the generator
+                    Any slashes will be replaced with underscores
+  --spec STRING     Set the spec
+
+  --gen, -g INT     The number of ids to create. Must be >= 0.
+                    Default = 1
+  --list-specs      Get the specs available from this version of bronze
+  --sequence-dir    Set the sequence directory
+                    Will attempt to create if not exist
+  --sequence-reset  Sets the sequence back to 0
+                    Nothing happens if file doesn't exist
+
+  --help, -h
+  --version, -v
+```
 
 
 ## Motivation
@@ -189,6 +228,7 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
 
 
 ## Notes
+  - There are no breaking changes between *0.x* and *1.x*.
   - `name` may contain any character, including dashes, but slashes (\\/) will be replaced with underscores (\_).
     - This allows the opportunity for an id used as a cross-platform filename with little concern.
   - Every machine in your distributed system should use a unique `name`. If every machine has a unique hostname (`process.env.HOSTNAME`) you should be fine.
@@ -204,16 +244,6 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
 
 
 ## Future
-  - CLI
-    ```sh
-    $ bronze
-    # > returns an id
-    $ bronze -n 10
-    # > returns 10 ids
-    ```
-    <!-- TODO: { "bin" : { "bronze" : "./cli.js" } } -->
-    <!-- TODO: ~/.bronze/${PID} sequence stream? -->
-
   - Nested IDs
     ```js
     const id1 = idGen.generate({name: 'example'})

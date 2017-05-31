@@ -1,5 +1,8 @@
 {
   "author": "Altus Aero LLC <team@altusaero.com> (https://altusaero.com/)",
+  "bin": {
+    "bronze": "./lib/cli.js"
+  },
   "bugs": {
     "email": "team@altusaero.com",
     "url": "https://github.com/altusaero/bronze/issues"

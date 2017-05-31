@@ -186,21 +186,21 @@ The CLI uses the module under the hood.
 Usage: bronze [options]
 
 Options:
-  --sequence INT    Set the counter for the number of ids generated
-                    By default will use sequence file (sequence path)
-                    If this option is used sequence file will not be updated
-  --pid INT         Set the process id for generated ids
-  --name STRING     A unique name for the generator
-                    Any slashes will be replaced with underscores
-  --spec STRING     Set the spec
+  --sequence INT          Set the counter for the number of ids generated
+                          By default will use sequence file (sequence path)
+                          If set sequence file will not be updated
+  --pid INT               Set the process id for generated ids
+  --name STRING           A unique name for the generator
+                          Any slashes will be replaced with underscores
+  --spec STRING           Set the spec
 
-  --gen, -g INT     The number of ids to create. Must be >= 0.
-                    Default = 1
-  --list-specs      Get the specs available from this version of bronze
-  --sequence-dir    Set the sequence directory
-                    Will attempt to create if not exist
-  --sequence-reset  Sets the sequence back to 0
-                    Nothing happens if file doesn't exist
+  --gen, -g INT           The number of ids to create. Must be >= 0.
+                          Default = 1
+  --list-specs            Get the specs available from this version of bronze
+  --sequence-dir STRING   Set the sequence directory
+                          Will attempt to create if not exist
+  --sequence-reset        Sets the sequence back to 0
+                          Nothing happens if file doesn't exist
 
   --help, -h
   --version, -v

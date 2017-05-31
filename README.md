@@ -244,6 +244,9 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
 
 
 ## Future
+  - CLI
+    - add `--parse` option
+      - JSON output
   - Nested IDs
     ```js
     const id1 = idGen.generate({name: 'example'})

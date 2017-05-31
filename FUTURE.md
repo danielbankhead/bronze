@@ -1,4 +1,7 @@
 ## Future
+  - CLI
+    - add `--parse` option
+      - JSON output
   - Nested IDs
     ```js
     const Bronze = require('bronze')

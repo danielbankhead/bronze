@@ -1,3 +1,73 @@
+## [1.0.0]
+
+- ### **Breaking Changes**
+  - Dropped Node 4 support
+
+- ### Updated tests
+  - aaa9b33408094cd797ffcadbbf85f192d51cb7c7
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 15:52:43 -0400
+
+- ### Fix `makeIfDirDoesntExist` function
+  - db4f3ec86ac90fe0ef032bda705e9065a5103813
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 15:51:41 -0400
+
+- ### Improved breaking changes support
+  - 0a05b22ff5fb53722a0b1c1177704c14a0c0ddb2
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 15:46:22 -0400
+
+- ### Bump `nyc`
+  - 7c2782deda61d4040e5c5ea237955e82c6e7109e
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 11:50:24 -0400
+
+- ### Clarify: --sequence-reset -> --sequence-dir-reset
+  - 96c74066ee4104a9675470efb85e3f1c8cc3bfc6
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 11:48:54 -0400
+
+- ### Bonus: available specs in --help output
+  - 1f9c2181e983f93c0e2fb75de612a9379530b90b
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 10:01:56 -0400
+
+- ### Drop Node 4 Support
+  - 5186ce748f87935b96ce6bf70490db21934989e8
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 00:13:07 -0400
+
+- ### Updated FUTURE
+  - ac9d412d5a7f73000f2dd7fba76f52f906a7f009
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-31 19:00:33 -0400
+
+- ### Clarify: file isn't created if it doesn't exist
+  - ae0087d20f1b6d27d7d4041a928468a3f9f11bfe
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-31 18:12:41 -0400
+
+- ### Updated `--sequence-dir` description
+  - 04b21d371dfa3086a5c9ccee283e627a951d430a
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-31 17:29:03 -0400
+
+- ### Added CLI support 🎉
+  - dca1fa7bd9deb93d4d7ebc16d89172f1808e4b9d
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-30 22:20:56 -0400
+
+- ### Make executable
+  - 8c7f84f8a862a467f4f4b65893d98265b5cc3ad6
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-30 18:43:54 -0400
+
+- ### Fix nested id example
+  - a620633c08ef932ba3c7a672de3ef87dcf81cf9c
+  - Author: **Daniel Bankhead**
+  - Date: 2017-05-11 11:15:40 -0400
+
 ## [0.3.0]
 
 - ### bump standard

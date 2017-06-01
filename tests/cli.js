@@ -16,7 +16,7 @@ const defaultName = process.env.HOSTNAME || 'localhost'
 const defaultSequencePath = path._makeLong(path.join(os.homedir(), '.bronze', 'sequence'))
 const nonDefaultSequenceDir = path._makeLong(path.join(os.homedir(), '.foo'))
 const nonDefaultSequencePath = path.join(nonDefaultSequenceDir, 'sequence')
-const nonDefaultSequenceBadPermsDir = path.join(nonDefaultSequenceDir, 'bar')
+const nonDefaultSequenceBadDir = nonDefaultSequencePath
 const nonDefaultSequenceDeepDir = path.join(nonDefaultSequenceDir, 'baz', 'cat', 'dog')
 const nonDefaultSequenceDeepDirRollback = [path.join(nonDefaultSequenceDir, 'baz', 'cat'), path.join(nonDefaultSequenceDir, 'baz')]
 
@@ -145,20 +145,16 @@ tape('cli', (t) => {
   t.equal(fs.existsSync(defaultSequencePath), true, `--sequence-dir (no-args) should use default sequence directory`)
 
   runCLICommand(`--sequence-dir=${nonDefaultSequenceDir}`)
-  fs.mkdirSync(nonDefaultSequenceBadPermsDir)
-  fs.chmodSync(nonDefaultSequenceBadPermsDir, 0)
 
   const tSequenceDirResetMessage = `--sequence-dir-reset should throw if error !== exist`
-  const tSequenceDirResetArgs = ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadPermsDir}`]
+  const tSequenceDirResetArgs = ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadDir}`]
 
   t.equal(childProcess.spawnSync(process.argv0, [cliPath, ...tSequenceDirResetArgs]).status, 1, tSequenceDirResetMessage)
 
   const tSequenceDirMessage = `--sequence-dir should throw if error !== exist`
-  const tSequenceDirArgs = [`--sequence-dir=${nonDefaultSequenceBadPermsDir}`]
+  const tSequenceDirArgs = [`--sequence-dir=${nonDefaultSequenceBadDir}`]
 
   t.equal(childProcess.spawnSync(process.argv0, [cliPath, ...tSequenceDirArgs]).status, 1, tSequenceDirMessage)
-
-  fs.rmdirSync(nonDefaultSequenceBadPermsDir)
 
   fs.writeFileSync(nonDefaultSequencePath, 'example', 'utf8')
 

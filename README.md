@@ -228,7 +228,7 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
 
 
 ## Notes
-  - There are no breaking changes between *0.x* and *1.x*.
+  - Node 6+ is required for *1.x*+.
   - `name` may contain any character, including dashes, but slashes (\\/) will be replaced with underscores (\_).
     - This allows the opportunity for an id used as a cross-platform filename with little concern.
   - Every machine in your distributed system should use a unique `name`. If every machine has a unique hostname (`process.env.HOSTNAME`) you should be fine.

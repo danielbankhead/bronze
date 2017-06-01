@@ -199,7 +199,7 @@ Options:
   --list-specs            Get the specs available from this version of bronze
   --sequence-dir STRING   Set the sequence directory
                           Will attempt to create if not exist
-  --sequence-reset        Sets the sequence back to 0
+  --sequence-dir-reset    Sets the sequence back to 0
                           File isn't created if it doesn't exist
 
   --help, -h

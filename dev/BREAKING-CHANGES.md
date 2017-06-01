@@ -1,2 +1,0 @@
-- ### **Breaking Changes**
-  - Dropped Node 4 support

@@ -14,7 +14,7 @@ const path = require('path')
 const cliPath = path.join(__dirname, '..', 'lib', 'cli.js')
 const defaultName = process.env.HOSTNAME || 'localhost'
 const defaultSequencePath = path._makeLong(path.join(os.homedir(), '.bronze', 'sequence'))
-const nonDefaultSequenceDir = path._makeLong(path.join(os.homedir(), 'foo'))
+const nonDefaultSequenceDir = path._makeLong(path.join(os.homedir(), '.foo'))
 const nonDefaultSequencePath = path.join(nonDefaultSequenceDir, 'sequence')
 const nonDefaultSequenceBadPermsDir = path.join(nonDefaultSequenceDir, 'bar')
 const nonDefaultSequenceDeepDir = path.join(nonDefaultSequenceDir, 'baz', 'cat', 'dog')
@@ -33,7 +33,11 @@ tape('cli', (t) => {
   }
 
   function runCLICommand (...args) {
-    return childProcess.execFileSync(cliPath, args).toString().trim()
+    if (process.platform !== 'win32') {
+      return childProcess.execFileSync(cliPath, args).toString().trim()
+    } else {
+      return childProcess.execSync(`${process.argv0} ${cliPath} ${args.join(' ')}`).toString().trim()
+    }
   }
 
   const helpText = runCLICommand('--help')
@@ -145,11 +149,19 @@ tape('cli', (t) => {
   fs.chmodSync(nonDefaultSequenceBadPermsDir, 0)
 
   t.throws(() => {
-    childProcess.execFileSync(cliPath, ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadPermsDir}`], {stdio: 'ignore'})
+    if (process.platform !== 'win32') {
+      childProcess.execFileSync(cliPath, ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadPermsDir}`], {stdio: 'ignore'})
+    } else {
+      childProcess.execSync(`${process.argv0} ${cliPath} --sequence-dir-reset --sequence-dir=${nonDefaultSequenceBadPermsDir}}`, {stdio: 'ignore'})
+    }
   }, `--sequence-dir-reset should throw if error !== exist`)
 
   t.throws(() => {
-    childProcess.execFileSync(cliPath, [`--sequence-dir=${nonDefaultSequenceBadPermsDir}`], {stdio: 'ignore'})
+    if (process.platform !== 'win32') {
+      childProcess.execFileSync(cliPath, [`--sequence-dir=${nonDefaultSequenceBadPermsDir}`], {stdio: 'ignore'})
+    } else {
+      childProcess.execSync(`${process.argv0} ${cliPath} --sequence-dir=${nonDefaultSequenceBadPermsDir}}`, {stdio: 'ignore'})
+    }
   }, `--sequence-dir should throw if error !== exist`)
 
   fs.rmdirSync(nonDefaultSequenceBadPermsDir)

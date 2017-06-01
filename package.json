@@ -44,7 +44,8 @@
   "nyc": {
     "branches": 100,
     "exclude": [
-      "dev"
+      "dev",
+      "tests"
     ],
     "functions": 100,
     "include": [

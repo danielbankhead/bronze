@@ -36,7 +36,7 @@ tape('cli', (t) => {
     if (process.platform !== 'win32') {
       return childProcess.execFileSync(cliPath, args).toString().trim()
     } else {
-      return childProcess.execSync(`${process.argv0} ${cliPath} ${args.join(' ')}`).toString().trim()
+      return childProcess.spawnSync(process.argv0, [cliPath, ...args]).stdout.toString().trim()
     }
   }
 
@@ -148,21 +148,15 @@ tape('cli', (t) => {
   fs.mkdirSync(nonDefaultSequenceBadPermsDir)
   fs.chmodSync(nonDefaultSequenceBadPermsDir, 0)
 
-  t.throws(() => {
-    if (process.platform !== 'win32') {
-      childProcess.execFileSync(cliPath, ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadPermsDir}`], {stdio: 'ignore'})
-    } else {
-      childProcess.execSync(`${process.argv0} ${cliPath} --sequence-dir-reset --sequence-dir="${nonDefaultSequenceBadPermsDir}"}`, {stdio: 'ignore'})
-    }
-  }, `--sequence-dir-reset should throw if error !== exist`)
+  const tSequenceDirResetMessage = `--sequence-dir-reset should throw if error !== exist`
+  const tSequenceDirResetArgs = ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadPermsDir}`]
 
-  t.throws(() => {
-    if (process.platform !== 'win32') {
-      childProcess.execFileSync(cliPath, [`--sequence-dir=${nonDefaultSequenceBadPermsDir}`], {stdio: 'ignore'})
-    } else {
-      childProcess.execSync(`${process.argv0} ${cliPath} --sequence-dir="${nonDefaultSequenceBadPermsDir}"}`, {stdio: 'ignore'})
-    }
-  }, `--sequence-dir should throw if error !== exist`)
+  t.equal(childProcess.spawnSync(process.argv0, [cliPath, ...tSequenceDirResetArgs]).status, 1, tSequenceDirResetMessage)
+
+  const tSequenceDirMessage = `--sequence-dir should throw if error !== exist`
+  const tSequenceDirArgs = [`--sequence-dir=${nonDefaultSequenceBadPermsDir}`]
+
+  t.equal(childProcess.spawnSync(process.argv0, [cliPath, ...tSequenceDirArgs]).status, 1, tSequenceDirMessage)
 
   fs.rmdirSync(nonDefaultSequenceBadPermsDir)
 

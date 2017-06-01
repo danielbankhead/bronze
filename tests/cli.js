@@ -17,7 +17,8 @@ const defaultSequencePath = path._makeLong(path.join(os.homedir(), '.bronze', 's
 const nonDefaultSequenceDir = path._makeLong(path.join(os.homedir(), 'foo'))
 const nonDefaultSequencePath = path.join(nonDefaultSequenceDir, 'sequence')
 const nonDefaultSequenceBadPermsDir = path.join(nonDefaultSequenceDir, 'bar')
-const nonDefaultSequenceDeepDir = path.join(nonDefaultSequenceDir, 'baz')
+const nonDefaultSequenceDeepDir = path.join(nonDefaultSequenceDir, 'baz', 'cat', 'dog')
+const nonDefaultSequenceDeepDirRollback = [path.join(nonDefaultSequenceDir, 'baz', 'cat'), path.join(nonDefaultSequenceDir, 'baz')]
 
 tape('cli', (t) => {
   function deleteSequencePath (givenPath) {
@@ -163,6 +164,12 @@ tape('cli', (t) => {
   t.equal(fs.readFileSync(path.join(nonDefaultSequenceDeepDir, 'sequence')).toString().trim(), '1', `--sequence-dir should handle multiple levels of depth`)
 
   deleteSequencePath(path.join(nonDefaultSequenceDeepDir, 'sequence'))
+  for (let i = 0, len = nonDefaultSequenceDeepDirRollback.length; i < len; i++) {
+    fs.rmdirSync(nonDefaultSequenceDeepDirRollback[i])
+  }
+
+  runCLICommand(`--sequence-dir=${nonDefaultSequenceDir}`)
+  deleteSequencePath(nonDefaultSequencePath)
 
   const genCompare = [runCLICommand('--gen=5').split('\n').length, runCLICommand('--gen', '5').split('\n').length, runCLICommand('-g=5').split('\n').length, runCLICommand('-g', '5').split('\n').length]
   const genUnique = runCLICommand('--gen=2').split('\n')

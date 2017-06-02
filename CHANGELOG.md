@@ -1,3 +1,37 @@
+## [1.0.1]
+
+
+
+- ### Optimized sequence path logic
+  - eb46366de3eb8d09ab3b42d2453b733dca2797fa
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 20:34:39 -0400
+
+- ### Fix: Tweak tests to work on Windows
+  - 412ef5505d94524552bacf79e023ee36b16bc47d
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 19:26:52 -0400
+
+- ### Fix: Update tests for Windows compatibility
+  - c62bd33a59aa9f96ee7b16215da5b3a150187146
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 18:58:08 -0400
+
+- ### Fix: `--sequence-dir="${nonDefaultSequenceBadPermsDir}"`
+  - 2cbb3c6a73ec65759d9c1864e02b1fb3a8bc1f54
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 17:31:51 -0400
+
+- ### Use `execSync` on Windows
+  - aace34919e1f029869d304df37a83553ed2d52d7
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 17:14:54 -0400
+
+- ### Updated `nonDefaultSequenceDeepDir` test case
+  - ae8c7de6aa9dd7160658fa4f4cbedee90a25fa1e
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 16:47:00 -0400
+
 ## [1.0.0]
 
 - ### **Breaking Changes**

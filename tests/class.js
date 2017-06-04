@@ -23,7 +23,7 @@ tape('class', (t) => {
   }
 
   t.equal(typeof Bronze.parse, 'function', 'Bronze.parse should be a function')
-  t.equal(Bronze.parse.length, 1, `Bronze.parse should have 1 argument`)
+  t.equal(Bronze.parse.length, 0, `Bronze.parse should have 1 (default) argument`)
 
   for (let i = 0; i < validIdsKeys.length; i++) {
     const validId = validIdsKeys[i]
@@ -37,6 +37,8 @@ tape('class', (t) => {
 
     t.equal(Bronze.parse(invalidId).valid, false, `\`${util.inspect(invalidId)}\` should be an invalid id`)
   }
+
+  t.equal(Bronze.parse().valid, false, `Bronze.parse() w/o parameter should be an invalid id`)
 
   t.end()
 })

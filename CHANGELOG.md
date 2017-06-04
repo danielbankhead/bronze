@@ -1,7 +1,5 @@
 ## [1.0.1]
 
-
-
 - ### Optimized sequence path logic
   - eb46366de3eb8d09ab3b42d2453b733dca2797fa
   - Author: **Daniel Bankhead**

@@ -2,7 +2,7 @@
 'use strict'
 
 class Bronze {
-  constructor (options) {
+  constructor (options = {}) {
     options = Object.assign({}, options)
 
     if (Number.isSafeInteger(options.sequence) === true) {
@@ -41,7 +41,7 @@ class Bronze {
     }
   }
 
-  generate (options) {
+  generate (options = {}) {
     const results = {
       timestamp: Date.now(),
       sequence: this.sequence,
@@ -83,7 +83,7 @@ class Bronze {
     }
   }
 
-  static parse (id) {
+  static parse (id = '') {
     const results = {
       valid: false
     }

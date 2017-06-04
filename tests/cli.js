@@ -2,6 +2,7 @@
 'use strict'
 
 const Bronze = require('../')
+const cli = require('../lib/cli')
 const config = require('../data/tests/config')
 const packageInfo = require('../package')
 const tape = require('tape')
@@ -19,6 +20,7 @@ const nonDefaultSequencePath = path.join(nonDefaultSequenceDir, 'sequence')
 const nonDefaultSequenceBadDir = nonDefaultSequencePath
 const nonDefaultSequenceDeepDir = path.join(nonDefaultSequenceDir, 'baz', 'cat', 'dog')
 const nonDefaultSequenceDeepDirRollback = [path.join(nonDefaultSequenceDir, 'baz', 'cat'), path.join(nonDefaultSequenceDir, 'baz')]
+const outputFunction = () => {}
 
 tape('cli', (t) => {
   function deleteSequencePath (givenPath) {
@@ -49,6 +51,29 @@ tape('cli', (t) => {
   deleteSequencePath(defaultSequencePath)
   deleteSequencePath(nonDefaultSequencePath)
   runCLICommand()
+
+  t.equal(typeof cli.displayHelp, 'function', `cli.displayHelp should be a function`)
+  t.equal(typeof cli.displaySpecs, 'function', `cli.displaySpecs should be a function`)
+  t.equal(typeof cli.displayVersion, 'function', `cli.displayVersion should be a function`)
+  t.equal(typeof cli.updateSequenceFile, 'function', `cli.updateSequenceFile should be a function`)
+  t.equal(typeof cli.makeIfDirDoesntExist, 'function', `cli.makeIfDirDoesntExist should be a function`)
+  t.equal(typeof cli.readFromSequenceFile, 'function', `cli.readFromSequenceFile should be a function`)
+  t.equal(typeof cli.generateIds, 'function', `cli.generateIds should be a function`)
+  t.equal(typeof cli.parseCommand, 'function', `cli.parseCommand should be a function`)
+  t.equal(typeof cli.output, 'function', `cli.output should be a function`)
+
+  cli.output = outputFunction
+
+  t.throws(cli.updateSequenceFile, `cli.updateSequenceFile should throw if no arguments are passed`)
+  t.throws(cli.makeIfDirDoesntExist, `cli.makeIfDirDoesntExist should throw if no arguments are passed`)
+  t.throws(cli.readFromSequenceFile, `cli.readFromSequenceFile should throw if no arguments are passed`)
+  t.throws(cli.generateIds, `cli.generateIds should throw if no arguments are passed`)
+
+  cli.output = undefined
+
+  t.equal(cli.output, console.log, `cli.setOutput should default to console.log when set to \`undefined\``)
+  t.equal(cli.output = outputFunction, outputFunction, `cli.setOutput should return the output function`)
+  t.equal(cli.output, outputFunction, `setting cli.output should update cli.output`)
 
   for (let i = 0, len = helpTextLines.length; i < len; i++) {
     if (helpTextLines[i].length > 80) {

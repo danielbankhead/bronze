@@ -55,7 +55,7 @@ tape('instance', (t) => {
     t.equal(idGen.sequence, 0, `spec ${spec} - idGen.nextSequence should return to 0 after passing \`Number.MAX_SAFE_INTEGER\``)
 
     t.equal(typeof idGen.generate, 'function', `spec ${spec} - idGen.generate should be function`)
-    t.equal(idGen.generate.length, 1, `spec ${spec} - idGen.generate should have 1 argument`)
+    t.equal(idGen.generate.length, 0, `spec ${spec} - idGen.generate should have 1 (default) argument`)
 
     t.equal(Bronze.parse(idGen.generate()).valid, true, `spec ${spec} - idGen.generate should create valid ids`)
 

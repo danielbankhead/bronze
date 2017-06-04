@@ -43,14 +43,7 @@
   "name": "bronze",
   "nyc": {
     "branches": 100,
-    "exclude": [
-      "dev",
-      "tests"
-    ],
     "functions": 100,
-    "include": [
-      "**/*.js"
-    ],
     "lines": 100,
     "reporter": [
       "html",
@@ -74,7 +67,7 @@
     "postversion": "git push && git push --tags",
     "preversion": "node dev/changelog-preversion",
     "start": "node .",
-    "tape": "tape \"tests/*.js\" | tap-spec",
+    "tape": "tape \"test/*.js\" | tap-spec",
     "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape",
     "version": "node dev/changelog-version"
   },

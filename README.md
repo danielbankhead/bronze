@@ -62,7 +62,6 @@ $ [sudo] npm install bronze -g
 - fast - can generate an id in less than .05ms - _even on old hardware_
 - can be conveniently sorted by `timestamp` or `name`
 - can be used as a module or via CLI
-- supports Node.js 4+
 
 
 ## Quick Start

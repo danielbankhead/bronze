@@ -1,3 +1,40 @@
+## [1.1.0]
+
+- ### Fix: breaking changes file path
+  - 8138667003d73226c4b7cb926a2e893cb9c7b49c
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-09 20:45:46 -0400
+
+- ### Fix: typo
+  - 01b2df6135c9b91787aba85125e249c6b07dcbca
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-08 21:30:30 -0400
+
+- ### updated test/ and data/ directories
+  - 4c392a35a0969218e1708f884b41bed23d0bf907
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-04 17:50:02 -0400
+
+- ### `tests` -> `test` to match conventions + `nyc` cleanup
+  - 4d2c6f0e36e199d5930fc1e45214e099732efd50
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-04 17:39:55 -0400
+
+- ### Added default params + modularized CLI
+  - 5d4c500862a53cd308d493546b5b65c89862be01
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-04 17:29:13 -0400
+
+- ### Update `nyc`
+  - 73a12d03a1f22f3f24b2f55deeacaec3c8a57e70
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-04 15:36:55 -0400
+
+- ### Minor: update breaking changes logic
+  - 7818ec5075d55643dcbfce121dc123cc3651190c
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-01 20:47:30 -0400
+
 ## [1.0.1]
 
 - ### Optimized sequence path logic

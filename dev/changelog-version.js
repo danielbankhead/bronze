@@ -7,7 +7,7 @@ const path = require('path')
 
 const packageInfo = require('../package')
 const changelogFilePath = path.join(__dirname, '..', 'CHANGELOG.md')
-const breakingChangesFilePath = path.join(__dirname, '..', 'docs', 'BREAKING-CHANGES.md')
+const breakingChangesFilePath = path.join(__dirname, 'BREAKING-CHANGES.md')
 
 fs.readFile(changelogFilePath, 'utf8', (error, existingData) => {
   if (error !== null) throw error

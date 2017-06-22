@@ -69,7 +69,7 @@ tape('cli', (t) => {
   if (process.platform !== 'win32') {
     t.throws(() => { cli.makeNestedDirectory('/somedir') }, `cli.makeNestedDirectory should throw on bad permissions`)
   } else {
-    t.throws(() => { cli.makeNestedDirectory(path.join(path.sep, path.sep, 'somedir')) }, `cli.makeNestedDirectory should throw on bad permissions`)
+    t.throws(() => {cli.makeNestedDirectory(path.join('/', 'Windows', 'System', 'somedir')) }, `cli.makeNestedDirectory should throw on bad permissions`)
   }
   t.doesNotThrow(cli.makeNestedDirectory, `cli.makeNestedDirectory should not throw if no arguments are passed`)
   t.doesNotThrow(cli.readFromSequenceFile, `cli.readFromSequenceFile should not throw if no arguments are passed`)

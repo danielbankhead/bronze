@@ -56,7 +56,7 @@ tape('cli', (t) => {
   t.equal(typeof cli.displaySpecs, 'function', `cli.displaySpecs should be a function`)
   t.equal(typeof cli.displayVersion, 'function', `cli.displayVersion should be a function`)
   t.equal(typeof cli.updateSequenceFile, 'function', `cli.updateSequenceFile should be a function`)
-  t.equal(typeof cli.makeIfDirDoesntExist, 'function', `cli.makeIfDirDoesntExist should be a function`)
+  t.equal(typeof cli.makeNestedDirectory, 'function', `cli.makeNestedDirectory should be a function`)
   t.equal(typeof cli.readFromSequenceFile, 'function', `cli.readFromSequenceFile should be a function`)
   t.equal(typeof cli.generateIds, 'function', `cli.generateIds should be a function`)
   t.equal(typeof cli.parseCommand, 'function', `cli.parseCommand should be a function`)
@@ -65,14 +65,15 @@ tape('cli', (t) => {
   cli.output = outputFunction
 
   t.throws(cli.updateSequenceFile, `cli.updateSequenceFile should throw if no arguments are passed`)
-  t.throws(cli.makeIfDirDoesntExist, `cli.makeIfDirDoesntExist should throw if no arguments are passed`)
-  t.throws(cli.readFromSequenceFile, `cli.readFromSequenceFile should throw if no arguments are passed`)
   t.throws(cli.generateIds, `cli.generateIds should throw if no arguments are passed`)
+  t.throws(() => { cli.makeNestedDirectory('/somedir') }, `cli.makeNestedDirectory should throw on bad permissions`)
+  t.doesNotThrow(cli.makeNestedDirectory, `cli.makeNestedDirectory should not throw if no arguments are passed`)
+  t.doesNotThrow(cli.readFromSequenceFile, `cli.readFromSequenceFile should not throw if no arguments are passed`)
 
   cli.output = undefined
 
   t.equal(cli.output, console.log, `cli.setOutput should default to console.log when set to \`undefined\``)
-  t.equal(cli.output = outputFunction, outputFunction, `cli.setOutput should return the output function`)
+  t.equal(cli.output = outputFunction, outputFunction, `setting cli.output should return the output function`)
   t.equal(cli.output, outputFunction, `setting cli.output should update cli.output`)
 
   for (let i = 0, len = helpTextLines.length; i < len; i++) {
@@ -86,30 +87,30 @@ tape('cli', (t) => {
   for (let i = 0; i < config.cli.helpCommands.length; i++) {
     const helpCommand = config.cli.helpCommands[i]
 
-    t.equal(runCLICommand(...helpCommand), helpText, `\`${helpCommand.join(' ')}\` should be a --help command`)
+    t.equal(runCLICommand(...helpCommand), helpText, `\`${helpCommand.join(' ')}\` should be a \`--help\` command`)
   }
 
-  t.equal(helpText.includes(defaultSequencePath), true, '--help should contain default sequence path')
-  t.equal(helpText.includes(packageInfo.license), true, '--help should contain license from package.json')
+  t.equal(helpText.includes(defaultSequencePath), true, '`--help` should contain default sequence path')
+  t.equal(helpText.includes(packageInfo.license), true, '`--help` should contain license from package.json')
 
   for (let i = 0; i < config.cli.listSpecsCommands.length; i++) {
     const listSpecsCommand = config.cli.listSpecsCommands[i]
 
-    t.equal(runCLICommand(...listSpecsCommand), listSpecsText, `\`${listSpecsCommand.join(' ')}\` should be a --list-specs command`)
+    t.equal(runCLICommand(...listSpecsCommand), listSpecsText, `\`${listSpecsCommand.join(' ')}\` should be a \`--list-specs\` command`)
   }
 
-  t.equal(helpText.includes(listSpecsText), true, '--list-specs should be in --help')
-  t.equal(listSpecsText.includes('\n') === false && listSpecsText.includes(' '), true, 'specs in --list-specs should be listed space-seperated')
-  t.deepEqual(listSpecsText.split(' '), config.specs, '--list-specs should only countain valid specs')
+  t.equal(helpText.includes(listSpecsText), true, '`--list-specs` should be in `--help`')
+  t.equal(listSpecsText.includes('\n') === false && listSpecsText.includes(' '), true, 'specs in `--list-specs` should be listed space-seperated')
+  t.deepEqual(listSpecsText.split(' '), config.specs, '`--list-specs` should only countain valid specs')
 
   for (let i = 0; i < config.cli.listSpecsCommands.length; i++) {
     const versionCommand = config.cli.versionCommands[i]
 
-    t.equal(runCLICommand(...versionCommand), versionText, `\`${versionCommand.join(' ')}\` should be a version command`)
+    t.equal(runCLICommand(...versionCommand), versionText, `\`${versionCommand.join(' ')}\` should be a \`--version\` command`)
   }
 
-  t.equal(helpText.includes(versionText), true, '--version should be in --help')
-  t.equal(versionText, packageInfo.version, '--version match version from package.json')
+  t.equal(helpText.includes(versionText), true, '`--version` should be in `--help`')
+  t.equal(versionText, packageInfo.version, '`--version` match version from package.json')
 
   deleteSequencePath(defaultSequencePath)
   deleteSequencePath(nonDefaultSequencePath)
@@ -126,14 +127,19 @@ tape('cli', (t) => {
   runCLICommand()
   runCLICommand('--sequence-dir', nonDefaultSequenceDir)
 
+  runCLICommand('--sequence-dir', '')
+  t.equal(typeof fs.readFileSync('sequence').toString().trim(), 'string', `\`--sequence-dir ""\` should use current directory and not throw`)
+
+  fs.unlinkSync('sequence')
+
   t.equal(fs.readFileSync(defaultSequencePath).toString().trim(), '2', `Default sequence path should increment by 1`)
   t.equal(fs.readFileSync(nonDefaultSequencePath).toString().trim(), '2', `Non-default sequence path should increment by 1`)
 
-  t.equal(Bronze.parse(runCLICommand('--sequence', '5')).sequence, 5, `--sequence should use given sequence`)
-  t.equal(Bronze.parse(runCLICommand('--sequence', '5', '--sequence-dir', nonDefaultSequenceDir)).sequence, 5, `--sequence should use given sequence, even if --sequence-dir is used`)
+  t.equal(Bronze.parse(runCLICommand('--sequence', '5')).sequence, 5, `\`--sequence\` should use given sequence`)
+  t.equal(Bronze.parse(runCLICommand('--sequence', '5', '--sequence-dir', nonDefaultSequenceDir)).sequence, 5, `\`--sequence\` should use given sequence, even if \`--sequence-dir\` is used`)
 
-  t.equal(fs.readFileSync(defaultSequencePath).toString().trim(), '2', `--sequence should not update default sequence path`)
-  t.equal(fs.readFileSync(nonDefaultSequencePath).toString().trim(), '2', `--sequence should not update non-default sequence path`)
+  t.equal(fs.readFileSync(defaultSequencePath).toString().trim(), '2', `\`--sequence\` should not update default sequence path`)
+  t.equal(fs.readFileSync(nonDefaultSequencePath).toString().trim(), '2', `\`--sequence\` should not update non-default sequence path`)
 
   deleteSequencePath(defaultSequencePath)
   deleteSequencePath(nonDefaultSequencePath)
@@ -144,8 +150,8 @@ tape('cli', (t) => {
   runCLICommand('--sequence-dir-reset')
   runCLICommand('--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceDir}`)
 
-  t.equal(fs.readFileSync(defaultSequencePath).toString().trim(), '1', `--sequence-dir-reset set default sequence path to 0 (1 post-generated)`)
-  t.equal(fs.readFileSync(nonDefaultSequencePath).toString().trim(), '1', `--sequence-dir-reset set --sequence-dir to 0 (1 post-generated)`)
+  t.equal(fs.readFileSync(defaultSequencePath).toString().trim(), '1', `\`--sequence-dir-reset\` set default sequence path to 0 (1 post-generated)`)
+  t.equal(fs.readFileSync(nonDefaultSequencePath).toString().trim(), '1', `\`--sequence-dir-reset\` set \`--sequence-dir\` to 0 (1 post-generated)`)
 
   deleteSequencePath(defaultSequencePath)
   deleteSequencePath(nonDefaultSequencePath)
@@ -153,30 +159,30 @@ tape('cli', (t) => {
   runCLICommand('--sequence', '5')
   runCLICommand('--sequence', '5', '--sequence-dir', nonDefaultSequenceDir)
 
-  t.equal(fs.existsSync(defaultSequencePath), false, `--sequence should not create default sequence path if it doesn't exist`)
-  t.equal(fs.existsSync(nonDefaultSequencePath), false, `--sequence should not create --sequence-dir if it doesn't exist`)
+  t.equal(fs.existsSync(defaultSequencePath), false, `\`--sequence\` should not create default sequence path if it doesn't exist`)
+  t.equal(fs.existsSync(nonDefaultSequencePath), false, `\`--sequence\` should not create \`--sequence-dir\` if it doesn't exist`)
 
   runCLICommand('--sequence=5', '--sequence-dir-reset')
   runCLICommand('--sequence=5', '--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceDir}`)
 
-  t.equal(fs.existsSync(defaultSequencePath), false, `--sequence=5 --sequence-dir-reset should not create default sequence path if it doesn't exist`)
-  t.equal(fs.existsSync(nonDefaultSequencePath), false, `--sequence=5 --sequence-dir-reset --sequence-dir should not create --sequence-dir if it doesn't exist`)
+  t.equal(fs.existsSync(defaultSequencePath), false, `\`--sequence=5\` --sequence-dir-reset\` should not create default sequence path if it doesn't exist`)
+  t.equal(fs.existsSync(nonDefaultSequencePath), false, `\`--sequence=5\` --sequence-dir-reset --sequence-dir\` should not create \`--sequence-dir\` if it doesn't exist`)
 
-  t.equal(Bronze.parse(runCLICommand('--sequence=5', '--sequence', '1')).sequence, 1, `--sequence=5 --sequence 1 should overwrite`)
-  t.equal(Bronze.parse(runCLICommand('--sequence', '5', '--sequence=10')).sequence, 10, `--sequence 5 --sequence=10 should overwrite`)
+  t.equal(Bronze.parse(runCLICommand('--sequence=5', '--sequence', '1')).sequence, 1, `\`--sequence=5 --sequence 1\` should overwrite`)
+  t.equal(Bronze.parse(runCLICommand('--sequence', '5', '--sequence=10')).sequence, 10, `\`--sequence 5 --sequence=10\` should overwrite`)
 
   runCLICommand('--sequence-dir')
 
-  t.equal(fs.existsSync(defaultSequencePath), true, `--sequence-dir (no-args) should use default sequence directory`)
+  t.equal(fs.existsSync(defaultSequencePath), true, `\`--sequence-dir\` (no-args) should use default sequence directory`)
 
   runCLICommand(`--sequence-dir=${nonDefaultSequenceDir}`)
 
-  const tSequenceDirResetMessage = `--sequence-dir-reset should throw if error !== exist`
+  const tSequenceDirResetMessage = `\`--sequence-dir-reset\` should throw if error !== exist`
   const tSequenceDirResetArgs = ['--sequence-dir-reset', `--sequence-dir=${nonDefaultSequenceBadDir}`]
 
   t.equal(childProcess.spawnSync(process.argv0, [cliPath, ...tSequenceDirResetArgs]).status, 1, tSequenceDirResetMessage)
 
-  const tSequenceDirMessage = `--sequence-dir should throw if error !== exist`
+  const tSequenceDirMessage = `\`--sequence-dir\` should throw if error !== exist`
   const tSequenceDirArgs = [`--sequence-dir=${nonDefaultSequenceBadDir}`]
 
   t.equal(childProcess.spawnSync(process.argv0, [cliPath, ...tSequenceDirArgs]).status, 1, tSequenceDirMessage)
@@ -188,7 +194,7 @@ tape('cli', (t) => {
 
   deleteSequencePath(nonDefaultSequencePath)
   runCLICommand(`--sequence-dir=${nonDefaultSequenceDeepDir}`)
-  t.equal(fs.readFileSync(path.join(nonDefaultSequenceDeepDir, 'sequence')).toString().trim(), '1', `--sequence-dir should handle multiple levels of depth`)
+  t.equal(fs.readFileSync(path.join(nonDefaultSequenceDeepDir, 'sequence')).toString().trim(), '1', `\`--sequence-dir\` should handle multiple levels of depth`)
 
   deleteSequencePath(path.join(nonDefaultSequenceDeepDir, 'sequence'))
   for (let i = 0, len = nonDefaultSequenceDeepDirRollback.length; i < len; i++) {
@@ -201,43 +207,43 @@ tape('cli', (t) => {
   const genCompare = [runCLICommand('--gen=5').split('\n').length, runCLICommand('--gen', '5').split('\n').length, runCLICommand('-g=5').split('\n').length, runCLICommand('-g', '5').split('\n').length]
   const genUnique = runCLICommand('--gen=2').split('\n')
 
-  t.equal(runCLICommand('--gen=5').split('\n').length, 5, `--gen=5 should create 5 ids seperated by line`)
-  t.equal(genUnique[0] === genUnique[1], false, `--gen should generate unique ids, not multiple of the same`)
-  t.equal(Bronze.parse(genUnique[0]).pid === Bronze.parse(genUnique[1]).pid, true, `--gen should generate unique ids with the same PID`)
-  t.deepEqual(genCompare, [5, 5, 5, 5], `--gen=5, --gen 5, -g=5, -g 5 should all create the same number of ids`)
+  t.equal(runCLICommand('--gen=5').split('\n').length, 5, `\`--gen=5\` should create 5 ids seperated by line`)
+  t.equal(genUnique[0] === genUnique[1], false, `\`--gen\` should generate unique ids, not multiple of the same`)
+  t.equal(Bronze.parse(genUnique[0]).pid === Bronze.parse(genUnique[1]).pid, true, `\`--gen\` should generate unique ids with the same PID`)
+  t.deepEqual(genCompare, [5, 5, 5, 5], `\`--gen=5\`, \`--gen 5\`, \`-g=5\`, \`-g 5\` should all create the same number of ids`)
 
-  t.equal(runCLICommand('--gen=5', '--gen=1').split('\n').length, 1, `--gen=5 --gen=1 should overwrite`)
-  t.equal(runCLICommand('--gen', '5', '--gen', '10').split('\n').length, 10, `--gen 5 --gen 10 should overwrite`)
-  t.equal(runCLICommand('-g=5', '-g=10').split('\n').length, 10, `-g=5 -g=10 should overwrite`)
-  t.equal(runCLICommand('-g', '5', '-g', '1').split('\n').length, 1, `-g 5 -g 1 should overwrite`)
+  t.equal(runCLICommand('--gen=5', '--gen=1').split('\n').length, 1, `\`-gen=5 --gen=1\` should overwrite`)
+  t.equal(runCLICommand('--gen', '5', '--gen', '10').split('\n').length, 10, `\`--gen 5 --gen 10\` should overwrite`)
+  t.equal(runCLICommand('-g=5', '-g=10').split('\n').length, 10, `\`-g=5 -g=10\` should overwrite`)
+  t.equal(runCLICommand('-g', '5', '-g', '1').split('\n').length, 1, `\`-g 5 -g 1\` should overwrite`)
 
-  t.equal(Bronze.parse(runCLICommand('--pid=5')).pid, 5, `--pid=5 should generate an id with pid`)
+  t.equal(Bronze.parse(runCLICommand('--pid=5')).pid, 5, `\`--pid=5\` should generate an id with pid`)
 
-  t.equal(Bronze.parse(runCLICommand('--pid=5', '--pid', '1')).pid, 1, `--pid=5 --pid 1 should overwrite`)
-  t.equal(Bronze.parse(runCLICommand('--pid', '5', '--pid=10')).pid, 10, `--pid 5 --pid=10 should overwrite`)
+  t.equal(Bronze.parse(runCLICommand('--pid=5', '--pid', '1')).pid, 1, `\`--pid=5 --pid 1\` should overwrite`)
+  t.equal(Bronze.parse(runCLICommand('--pid', '5', '--pid=10')).pid, 10, `\`--pid 5 --pid=10\` should overwrite`)
 
-  t.equal(Bronze.parse(runCLICommand('--name=example')).name, 'example', `--name=example should generate an name 'example'`)
+  t.equal(Bronze.parse(runCLICommand('--name=example')).name, 'example', `\`--name=example\` should generate an name 'example'`)
 
-  t.equal(Bronze.parse(runCLICommand('--name=example', '--name', 'foo')).name, 'foo', `--name=example --name foo should overwrite`)
-  t.equal(Bronze.parse(runCLICommand('--name', 'example', '--name=bar')).name, 'bar', `--name example --name=bar should overwrite`)
-  t.equal(Bronze.parse(runCLICommand('--name')).name, defaultName, `--name (no args) should not generate with a name.`)
+  t.equal(Bronze.parse(runCLICommand('--name=example', '--name', 'foo')).name, 'foo', `\`--name=example --name foo\` should overwrite`)
+  t.equal(Bronze.parse(runCLICommand('--name', 'example', '--name=bar')).name, 'bar', `\`--name example --name=bar\` should overwrite`)
+  t.equal(Bronze.parse(runCLICommand('--name')).name, defaultName, `\`--name\` (no args) should not generate with a name.`)
 
   for (let i = 0; i < config.specs.length; i++) {
     const spec = config.specs[i]
     let overwriteSpec = config.specs[0]
 
-    t.equal(Bronze.parse(runCLICommand(`--spec=${spec}`)).spec, spec, `--spec=${spec} should be a valid spec`)
-    t.equal(Bronze.parse(runCLICommand('--spec', spec)).spec, spec, `--spec ${spec} should be a valid spec`)
+    t.equal(Bronze.parse(runCLICommand(`--spec=${spec}`)).spec, spec, `\`--spec=${spec}\` should be a valid spec`)
+    t.equal(Bronze.parse(runCLICommand('--spec', spec)).spec, spec, `\`--spec ${spec}\` should be a valid spec`)
 
     if (i === 0) {
       overwriteSpec = config.specs[1]
     }
 
-    t.equal(Bronze.parse(runCLICommand(`--spec=${spec}`, '--spec', overwriteSpec)).spec, overwriteSpec, `--spec=${spec} --spec ${overwriteSpec} should overwrite`)
-    t.equal(Bronze.parse(runCLICommand('--spec', spec, `--spec=${overwriteSpec}`)).spec, overwriteSpec, `--spec ${spec} --spec=${overwriteSpec} should overwrite`)
+    t.equal(Bronze.parse(runCLICommand(`--spec=${spec}`, '--spec', overwriteSpec)).spec, overwriteSpec, `\`--spec=${spec} --spec ${overwriteSpec}\` should overwrite`)
+    t.equal(Bronze.parse(runCLICommand('--spec', spec, `--spec=${overwriteSpec}`)).spec, overwriteSpec, `\`--spec ${spec} --spec=${overwriteSpec}\` should overwrite`)
   }
 
-  t.equal(Bronze.parse(runCLICommand(`--spec`)).spec, config.defaultSpec, `--name (no args) should use to default spec.`)
+  t.equal(Bronze.parse(runCLICommand(`--spec`)).spec, config.defaultSpec, `\`--name\` (no args) should use to default spec.`)
 
   deleteSequencePath(defaultSequencePath)
   deleteSequencePath(nonDefaultSequencePath)

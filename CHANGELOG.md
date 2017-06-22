@@ -1,3 +1,45 @@
+## [1.2.0]
+
+- ### Improve makeNestedDirectory logic
+  - 55142fade8c9dde975d2174e1abe7aeb6d430616
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-21 22:58:58 -0400
+
+- ### Fix: Windows #3
+  - 820b02be47cccf062447da6aed533418aab7ba60
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-21 22:35:04 -0400
+
+- ### Fix: Windows #2.1
+  - e8f09682684583a4e8965a72a43075e5e78fe486
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-21 22:20:31 -0400
+
+- ### Fix: Windows #2
+  - a37bd80449efeef79ee66e984a9e47c4ede545b7
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-21 22:20:07 -0400
+
+- ### Fix: Windows
+  - 636be1e8d592e93ff628186fb2989823943a4e2a
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-21 22:15:45 -0400
+
+- ### Allow current directory for `--sequence-dir`
+  - 8dbf009f45af7d13b7c1b8e3ab510995793569cc
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-21 21:48:46 -0400
+
+- ### `makeIfDirDoesntExist` -> `makeNestedDirectory`
+  - 97560942b93bd69c32e351ab2921d13102104946
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-13 15:10:47 -0400
+
+- ### Improve `makeIfDirDoesntExist` logic
+  - b32ac2668ad141e290a0dac72aae8bc55f8d6d62
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-13 15:06:40 -0400
+
 ## [1.1.0]
 
 - ### Fix: breaking changes file path

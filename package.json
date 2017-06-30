@@ -15,11 +15,11 @@
   "devDependencies": {
     "coveralls": "^2.12.0",
     "nsp": "^2.6.3",
-    "nyc": "^11.0.2",
+    "nyc": "^11.0.3",
     "pre-commit": "^1.2.2",
     "standard": "^10.0.2",
     "tap-spec": "^4.1.1",
-    "tape": "^4.6.0"
+    "tape": "^4.7.0"
   },
   "engines": {
     "node": ">=6.0.0",
@@ -67,7 +67,7 @@
     "postversion": "git push && git push --tags",
     "preversion": "node dev/changelog-preversion",
     "start": "node .",
-    "tape": "tape \"test/*.js\" | tap-spec",
+    "tape": "tape test/*.js | tap-spec",
     "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape",
     "version": "node dev/changelog-version"
   },

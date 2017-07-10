@@ -62,6 +62,7 @@ $ [sudo] npm install bronze -g
 - fast - can generate an id in less than .05ms - _even on old hardware_
 - can be conveniently sorted by `timestamp` or `name`
 - can be used as a module or via CLI
+- supports Node 6+ and browsers
 
 
 ## Quick Start
@@ -177,6 +178,24 @@ A spec determines what goes into an id and how its information is sorted.
 <!-- TODO:
   See [examples](examples).
 -->
+## Browser Usage
+
+Using bronze in the browser is pretty straight-forward. The following is an example for using with [webpack](https://webpack.js.org):
+
+```js
+window.Bronze = require('bronze')
+```
+
+As of webpack 3, no special loaders are required to use bronze. Since most browser environments do not support the `process` object (with the exception of [Electron](https://electron.atom.io), [NW.js](https://nwjs.io), and the like), you should pass the `pid` and `name` options to the constructor, like so:
+
+```js
+new Bronze({pid: 1, name: 'browser'})
+```
+
+If you are using bronze in a distributed environment you should verify the generated `name` via `Bronze.parse` in a trusted space, such as the server-side.
+
+
+
 ## CLI Usage
 
 The CLI uses the module under the hood.

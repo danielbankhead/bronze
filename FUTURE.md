@@ -31,4 +31,4 @@
     - would be pretty cool - imagine the convenience of nesting a video_id into a comment_id
 
   - `examples/`
-    - add a few examples
+    - add a few examples, including a browser example

@@ -1,4 +1,3 @@
-#! /usr/local/bin/node
 'use strict'
 
 class Bronze {
@@ -11,15 +10,15 @@ class Bronze {
       this.sequence = 0
     }
 
-    this.pid = process.pid
-
     if (Number.isSafeInteger(options.pid) === true) {
       this.pid = options.pid
+    } else {
+      this.pid = process.pid
     }
 
     if (typeof options.name === 'string') {
       this.nameRaw = options.name
-    } else if (typeof process.env.HOSTNAME === 'string') {
+    } else if (typeof process === 'object' && typeof process.env.HOSTNAME === 'string') {
       this.nameRaw = process.env.HOSTNAME
     } else {
       this.nameRaw = this.constructor.defaultName
@@ -52,6 +51,14 @@ class Bronze {
 
     options = Object.assign({}, options)
 
+    if (this.constructor.specs[results.spec] !== true) {
+      throw new Error('Unknown spec')
+    }
+
+    if (Number.isSafeInteger(results.pid) === false) {
+      throw new Error('Process ID is not a safe integer')
+    }
+
     this.nextSequence()
 
     if (options.json === true) {
@@ -62,8 +69,6 @@ class Bronze {
           return `${results.timestamp}-${results.sequence}-${results.pid}-${results.name}-${results.spec}`
         case '1b':
           return `${results.name}-${results.pid}-${results.timestamp}-${results.sequence}-${results.spec}`
-        default:
-          throw new Error('Unknown spec.')
       }
     }
   }

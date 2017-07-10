@@ -68,9 +68,13 @@ tape('instance', (t) => {
     t.equal(typeof invalidJsonArg, 'string', `spec ${spec} - using an invalid \`json\` argument should fallback to the default format (string)`)
     t.equal(Bronze.parse(invalidJsonArg).valid, true, `spec ${spec} - using an invalid \`json\` argument should fallback to the default format (string) and create a valid id`)
 
+    idGen.pid = null
+
+    t.throws(() => idGen.generate(), /Process ID is not a safe integer/g, `spec ${spec} - An invalid pid should throw an error`)
+
     idGen.spec = invalidSpec
 
-    t.throws(() => idGen.generate(), /Unknown spec\./g, `spec ${spec} - An unknown spec should throw an error`)
+    t.throws(() => idGen.generate(), /Unknown spec/g, `spec ${spec} - An unknown spec should throw an error`)
   }
 
   t.end()

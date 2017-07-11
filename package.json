@@ -19,7 +19,8 @@
     "pre-commit": "^1.2.2",
     "standard": "^10.0.2",
     "tap-spec": "^4.1.1",
-    "tape": "^4.7.0"
+    "tape": "^4.7.0",
+    "webpack": "^3.1.0"
   },
   "engines": {
     "node": ">=6.0.0",
@@ -63,6 +64,7 @@
   "private": false,
   "repository": "altusaero/bronze",
   "scripts": {
+    "build": "webpack index.js build/Release/bundle.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard",
     "nsp": "nsp check",
@@ -70,7 +72,7 @@
     "preversion": "node dev/changelog-preversion",
     "start": "node .",
     "tape": "tape test/*.js | tap-spec",
-    "test": "npm run nsp && npm run lint && nyc --check-coverage --show-process-tree npm run tape",
+    "test": "npm run nsp && npm run lint && npm run build && nyc --check-coverage --show-process-tree npm run tape",
     "version": "node dev/changelog-version"
   },
   "standard": {},

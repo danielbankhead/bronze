@@ -180,13 +180,7 @@ A spec determines what goes into an id and how its information is sorted.
 -->
 ## Browser Usage
 
-Using bronze in the browser is pretty straight-forward. The following is an example for using with [webpack](https://webpack.js.org):
-
-```js
-window.Bronze = require('bronze')
-```
-
-As of webpack 3, no special loaders are required to use bronze. Since most browser environments do not support the `process` object (with the exception of [Electron](https://electron.atom.io), [NW.js](https://nwjs.io), and the like), you should pass the `pid` and `name` options to the constructor, like so:
+Using bronze in the browser is pretty straight-forward. As of [webpack](https://webpack.js.org) 3, no special loaders are required to use bronze. Since most browser environments do not support the `process` object (with the exception of [Electron](https://electron.atom.io), [NW.js](https://nwjs.io), and the like), you should pass the `pid` and `name` options to the constructor, like so:
 
 ```js
 new Bronze({pid: 1, name: 'browser'})

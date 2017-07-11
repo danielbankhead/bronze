@@ -1,3 +1,15 @@
+## [1.4.0]
+
+- ### Added webpack for browser build & testing
+  - 4312b40bfb670ebbce18941a5c18a911c5f09f1b
+  - Author: **Daniel Bankhead**
+  - Date: 2017-07-11 11:30:29 -0400
+
+- ### Added outdated package-lock.json for 1.3.0
+  - de0ba2669b94891b2850d0291f955c703ec80bb5
+  - Author: **Daniel Bankhead**
+  - Date: 2017-07-10 22:16:33 -0400
+
 ## [1.3.0]
 
 - ### Minor: remove empty `standard.ignore` config

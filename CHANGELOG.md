@@ -1,3 +1,20 @@
+## [1.3.0]
+
+- ### Minor: remove empty `standard.ignore` config
+  - 900c15b7498b47e2205be997468b898a956028ca
+  - Author: **Daniel Bankhead**
+  - Date: 2017-07-10 19:37:19 -0400
+
+- ### Prepare for browser support
+  - e5cd4260641517c1652277a1b7f16111da3cdbb7
+  - Author: **Daniel Bankhead**
+  - Date: 2017-07-10 19:32:38 -0400
+
+- ### Updated dev dependencies
+  - 5075013cc07ec43dee50d42fb5dcbde570c10570
+  - Author: **Daniel Bankhead**
+  - Date: 2017-06-30 12:56:41 -0400
+
 ## [1.2.0]
 
 - ### Improve makeNestedDirectory logic

@@ -4,6 +4,7 @@
 
 - Search before filing an issue or pull request
 - Feel free to take a try at [FUTURE.md](FUTURE.md)
+- Contributions should follow our [git branching model](https://github.com/AltusAero/git-branching-model)
 - Create tests for new features.
   - If you need help we can work through this during the PR process, but it will take additional time.
 - When it comes to performance vs readability the following order is preferred:
@@ -18,7 +19,7 @@ JavaScript: [JavaScript Standard Style](http://standardjs.com)
 
 ## Code of Conduct
 
-Just be cool.
+Just be cool. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) on what we think this means.
 
 ## Developer's Certificate of Origin
 

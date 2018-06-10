@@ -13,6 +13,7 @@ install:
 
 test_script:
   - node --version
+  - npm i -g npm@6
   - npm --version
   - npm test
 

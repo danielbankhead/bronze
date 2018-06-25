@@ -16,7 +16,8 @@
 .svn
 .wafpickle-*
 _.json
-build/Release
+build
+dist
 config.gypi
 coverage
 CVS

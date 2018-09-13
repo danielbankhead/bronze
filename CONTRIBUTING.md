@@ -9,13 +9,20 @@
   - If you need help we can work through this during the PR process, but it will take additional time.
 - When it comes to performance vs readability the following order is preferred:
   - performance gains in an order of magnitude
-  - code readability
-- Run tests before making proposed changes (we use [pre-commit](https://www.npmjs.com/package/pre-commit) to automate this step)
+  - code readability (including modern syntax)
+- Update [CHANGELOG.md](CHANGELOG.md) - preferably adding to the `[Unreleased]` section
+- Feel free to add yourself to the [AUTHORS](AUTHORS) file after making a contribution
+- If you are interested in tackling TODOs and others challenges in the codebase feel free to search by using the following regex:
+  ```js
+  /@?(TODO|FIXME|CHANGED|XXX|IDEA|HACK|NOTE|REVIEW|NB|BUG|QUESTION|COMBAK|TEMP|TEST|FIX):/
+  ```
+  - You can also use the same pattern in the comments of any contribution
 - You must agree to the [Developer's Certificate of Origin](http://developercertificate.org) (found below).
 
 ## Style Guide
 
 JavaScript: [JavaScript Standard Style](http://standardjs.com)
+TypeScript: [JavaScript Standard Style](http://standardjs.com)
 
 ## Code of Conduct
 

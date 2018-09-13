@@ -25,14 +25,16 @@
 [github-graphs-contributors]: https://github.com/AltusAero/bronze/graphs/contributors
 [standardjs]: http://standardjs.com/
 
-
+<p align="center">
+  <img title="Bronze logo" alt="Bronze logo" src="https://altusaero.net/opensource/bronze/logo/1.0/bronze.svg">
+</p>
 
 ```js
 const Bronze = require('bronze')
 
-const idGen = new Bronze({name: 'example'})
+const b = new Bronze({name: 'example'})
 
-const id = idGen.generate()
+const id = b.generate()
 // 1482810226160-0-14210-example-1a
 ```
 
@@ -48,7 +50,7 @@ $ bronze --name example
 $ npm install bronze
 ```
 
-CLI only:
+Global CLI:
 ```sh
 $ [sudo] npm install bronze -g
 ```
@@ -56,166 +58,130 @@ $ [sudo] npm install bronze -g
 
 ## Features
 
-- designed for distributed and singleton systems
-- no time-based (`UUID1`) or random (`UUID4`) collisions
-- collision resistant - safely generate up to **9,007,199,254,740,991** ids within a single millisecond
-- fast - can generate an id in less than .05ms - _even on old hardware_
-- can be conveniently sorted by `timestamp` or `name`
-- can be used as a module or via CLI
-- supports Node 6+ and browsers
+- Written in TypeScript, compiled to JavaScript for use in Node.js, browsers, or via CLI
+- Designed for distributed and singleton systems
+- Collision resistant - safely generate up to **9,007,199,254,740,991** ids within a single millisecond
+  - No time-based (`UUID1`) or random (`UUID4`) collisions
+- Fast - can generate an id in less than .05ms - _even on 10 year old hardware_
+- Can be conveniently sorted via `timestamp` or `name`
+- Conveniently exported in Commonjs and ES6 module formats
 
 
 ## Quick Start
 
 ```js
 const Bronze = require('bronze')
-const idGen = new Bronze()
+const b = new Bronze()
 
-idGen.generate()
+b.generate()
 // > 1483113483923-0-12179-localhost-1a
-idGen.generate()
+b.generate()
 // > 1483113483923-1-12179-localhost-1a
 
-// continue to create ids throughout your code
+// continue to create ids throughout your project
 ```
 
 
 ## Specs
 
-A spec determines what goes into an id and how its information is sorted.
+A spec determines what goes into an id and how its information is sorted. Specs that end with `a` or `b` automatically replaces slashes (`\/`) with underscores (`_`) in `name`, making them more cross-platform filename/URL-friendly. Specs that end with `c` or `d` have their names passed as-is.
 
 `Type 1` - contains a `timestamp` in milliseconds, a `sequence` number, a process id (`PID`), and a `name`
-- `1a` is ordered by `timestamp` - `sequence` - `pid` - `name`
+- `1a`, `1c` are formatted as `{timestamp}-{sequence}-{pid}-{name}-{spec}`
   - useful for timestamp-based sorting
   - ex: `1482981306438-0-5132-example-1a`
-- `1b` is ordered by `name` - `pid` - `timestamp` - `sequence`
+- `1b`, `1d` are formatted as `{name}-{pid}-{timestamp}-{sequence}-{spec}`
   - useful for name-based sorting
   - ex: `example-5132-1482981317498-0-1b`
+
+`Type 2` - contains all attributes from `Type 1` with the addition of a random hexadecimal string. **The random string is not factored into the the id's uniqueness, but rather to make the next id in a sequence less predictable.** This is useful for situations where privacy is important, such as user ids and file uploads, while also preserving compatibility for URLs and file paths.
+- `2a`, `2c` are formatted as `{timestamp}-{sequence}-{pid}-{randomString}-{name}-{spec}`
+  - useful for timestamp-based sorting
+  - ex: `1500050587899-1-2422-localhost-a3227cf0a08530e3b65f-2a`
+- `2b`, `2d` are formatted as `{name}-{pid}-{timestamp}-{randomString}-{sequence}-{spec}`
+  - useful for name-based sorting
+  - ex: `example-1223-1500145125593-0-40d68422ab91c6b34f52-2b`
 
 
 ## Usage
 
-`Bronze` CLASS
-  - _static_ _get_ `defaultName` STRING
-    - the default name for new instances (if not provided)
+### Node.js
 
-  - _static_ _get_ `defaultSpec` STRING
-    - the default spec for new instances
+TODO: jetta-style intro
 
-  - _static_ _get_ `specs` OBJECT
-    - the default name
+See [examples](examples/).
 
-  - _static_ `parse` (id)
-    - parses an id to JSON-compatible object
 
-    - `id` STRING **required**
-      - an id to parse
+### Browser
 
-  - _new_ Bronze (options)
-    - Example:
-    ```js
-    const idGen = new Bronze({name: 'example', sequence: 1})
-    ```
-
-    - `options` OBJECT
-      - `sequence` INTEGER
-        - the number of ids generated.
-        - convenient for continuing creating ids where you left off (no pre-increment required)
-        - if invalid falls back to default
-        - _default_ = 0
-      - `pid` INTEGER
-        - a process id to number to use for generated ids
-        - if invalid falls back to default
-        - _default_ = process.pid, else 0
-      - `name` STRING
-        - a unique name for the generator - replaces slashes (\\/) with underscores (\_)
-        - **IMPORTANT** - do not use the same name at the same time on different machines
-        - if invalid falls back to default
-        - _default_ = process.env.HOSTNAME, else _constructor_.defaultName
-      - `spec` STRING
-        - set the spec
-        - if invalid falls back to default
-        - _default_ = _constructor_.defaultSpec
-
-    - _instance_ OBJECT
-      - `sequence` INTEGER
-        - the current sequence
-      - `pid` INTEGER
-        - the pid in use
-      - `name` STRING
-        - the parsed name to be used in ids
-      - `nameRaw` STRING
-        - the raw, pre-parsed name
-      - `spec` STRING
-        - the spec in use
-
-      - `generate` ([options])
-        - generates a new id
-        - Example:
-        ```js
-        const idGen = new Bronze()
-        const id = idGen.generate()
-        // > 1482810226160-0-14210-localhost-1a
-        ```
-
-        - `options` OBJECT _optional_
-          - `json` BOOLEAN
-            - returns results as JSON-compatible object instead of STRING
-            - _default_ = false
-
-        - _return_ id STRING | OBJECT
-          - The generated id
-          - returns an object if `options.json === true`
-
-      - `nextSequence` ()
-        - manually advances the sequence
-        - Example:
-        ```js
-        const idGen = new Bronze()
-        idGen.nextSequence()
-        ```
-
-<!-- TODO:
-  See [examples](examples).
--->
-## Browser Usage
-
-Using bronze in the browser is pretty straight-forward. As of [webpack](https://webpack.js.org) 3, no special loaders are required to use bronze. Since most browser environments do not support the `process` object (with the exception of [Electron](https://electron.atom.io), [NW.js](https://nwjs.io), and the like), you should pass the `pid` and `name` options to the constructor, like so:
+Using bronze in the browser is pretty straight-forward. As of [webpack](https://webpack.js.org) 4, no special loaders are required to use bronze. Since most browser environments do not support the `process` object (with the exception of [Electron](https://electron.atom.io), [NW.js](https://nwjs.io), and the like), you should pass the `pid` and `name` options to the constructor, like so:
 
 ```js
 new Bronze({pid: 1, name: 'browser'})
 ```
 
+Expanded Example:
+```js
+import Bronze from 'bronze'
+
+function main () {
+  const bronze = new Bronze({name: 'browser-example', pid: 1})
+  const id = bronze.generate()
+
+  const elem = document.getElementById('id-placement')
+
+  if (elem !== null) {
+    elem.innerText = id
+  } else {
+    console.dir({bronze, elem, id})
+  }
+}
+
+main()
+```
+
 If you are using bronze in a distributed environment you should verify the generated `name` via `Bronze.parse` in a trusted space, such as the server-side.
 
 
-
-## CLI Usage
+### CLI
 
 The CLI uses the module under the hood.
-
-```
+```txt
 Usage: bronze [options]
 
 Options:
-  --sequence INT          Set the counter for the number of ids generated
-                          By default will use sequence file (sequence path)
-                          If set sequence file will not be updated
-  --pid INT               Set the process id for generated ids
-  --name STRING           A unique name for the generator
-                          Any slashes will be replaced with underscores
+  --sequence INT          Set the counter for the number of ids generated.
+                          By default will use the 'sequence' file found in
+                          the cache directory. If this value has been set
+                          then the cached sequence file will not be updated
+  --pid INT               Set the process id for generated ids.
+  --name STRING           A unique name for the generator.
   --spec STRING           Set the spec
 
   --gen, -g INT           The number of ids to create. Must be >= 0.
                           Default = 1
   --list-specs            Get the specs available from this version of bronze
-  --sequence-dir STRING   Set the sequence directory
-                          Will attempt to create if not exist
-  --sequence-dir-reset    Sets the sequence back to 0
-                          File isn't created if it doesn't exist
+  --cache-dir STRING      Set the cache directory. This used for keeping
+                          the sequence between executions. This directory
+                          will attempt to create if not exist
+  --cache-reset-sequence  Sets the sequence back to 0. The file is not created
+                          if it doesn't exist
+  --random-bytes INT      The number of pseudo-random bytes to generate for
+                          any ids. This is uses the crypto module and is unique
+                          for every generated id. If --spec option is not used,
+                          then will default to the default random spec.
+  --json, -j              Return the generated ids in JSON rather than a string
+
+  --parse, -p STRING      Parse the given id into a JSON object
+  --stringify STRING      Converts the given id in JSON format to a string
 
   --help, -h
   --version, -v
+```
+
+Can also be used via [`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b):
+```sh
+$ npx bronze [options]
 ```
 
 
@@ -223,7 +189,9 @@ Options:
 
 While developing a distributed system using `UUID1` and `UUID4` we found that we would run into collisions as we scaled.
   - `UUID1` (timeuuids) can have collisions within 100ns, which can happen when migrating/importing data in bulk
-  - `UUID4` can have collisions at random. While the risk is reasonably small, a chance of data loss does not sit well with us.
+  - `UUID4` can have collisions at random. While the risk is reasonably small, a chance of data loss does not sit well with us, especially if one decides to generate millions of ids/day.
+  - Being able to extract data from ids came as a secondary bonus
+
 
 ## Goals
   - no collisions
@@ -240,9 +208,8 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
 
 
 ## Notes
-  - Node 6+ is required for *1.x*+.
-  - `name` may contain any character, including dashes, but slashes (\\/) will be replaced with underscores (\_).
-    - This allows the opportunity for an id used as a cross-platform filename with little concern.
+  - Node 8+ is required
+  - If using via CLI Node.js must be built with [crypto support](https://nodejs.org/api/crypto.html#crypto_determining_if_crypto_support_is_unavailable) enabled (most installations have this by default).
   - Every machine in your distributed system should use a unique `name`. If every machine has a unique hostname (`process.env.HOSTNAME`) you should be fine.
   - To avoid collisions:
     - Do not reuse a `name` on a different machine within your distributed system's range of clock skew.
@@ -250,38 +217,36 @@ While developing a distributed system using `UUID1` and `UUID4` we found that we
     - Only one instance of Bronze should be created on a single process (`PID`) to avoid collisions.
       - Each worker spawned from Node's `cluster` module receives its own `PID` so no worries here.
   - Sequence counter automatically resets after reaching `Number.MAX_SAFE_INTEGER` (9007199254740991)
-  - Without string parsing, timestamp sorting (`spec 1a`) is supported up to `2286-11-20T17:46:39.999Z` (9999999999999)
+  - Without string parsing, timestamp sorting (specs `1a`, `1c`, `2a`, `2c`) is supported up to `2286-11-20T17:46:39.999Z` (9999999999999)
   - Using with databases, such as Cassandra:
     - most `text` data types should do the trick
 
 
 ## Future
-  - CLI
-    - add `--parse` option
-      - JSON output
   - Nested IDs
-    ```js
-    const id1 = idGen.generate({name: 'example'})
-    console.log(id1)
-    // > 1482810226160-0-14210-example-1a
+    - Example:
+      ```js
+      const id1 = b.generate({name: 'example'})
+      console.log(id1)
+      // > 1482810226160-0-14210-example-1a
 
-    // Nested
-    idGen.name = id1
-    const id2 = idGen.generate()
-    console.log(id2)
-    // > 1482810226222-1-14210-1482810226160-0-14210-example-1a-1a
+      // Nested
+      b.name = id1
+      const id2 = b.generate()
+      console.log(id2)
+      // > 1482810226222-1-14210-1482810226160-0-14210-example-1a-1a
 
-    Bronze.parse('1482810226222-1-14210-1482810226160-0-14210-example-1a-1a')
-    // { valid: true,
-    //   timestamp: 1482810226222,
-    //   sequence: 1,
-    //   pid: 14210,
-    //   name: '1482810226160-0-14210-example-1a',
-    //   spec: '1a' }
+      Bronze.parse('1482810226222-1-14210-1482810226160-0-14210-example-1a-1a')
+      // { valid: true,
+      //   timestamp: 1482810226222,
+      //   sequence: 1,
+      //   pid: 14210,
+      //   name: '1482810226160-0-14210-example-1a',
+      //   spec: '1a' }
 
-    // can also nest id2, id3, id4, id5, ...idN
-    ```
+      // can also nest id2, id3, id4, id5, ...idN
+      ```
     - the issue the moment is the possibility of collisions (no unique name)
-    - would be pretty cool - imagine the convenience of nesting a video_id into a comment_id
+    - would be pretty cool - imagine the convenience of nesting a `video_id` into a `comment_id`
 
   - See more in [FUTURE.md](FUTURE.md)

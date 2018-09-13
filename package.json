@@ -1,30 +1,28 @@
 {
   "author": "Altus Aero LLC <team@altusaero.com> (https://altusaero.com/)",
   "bin": {
-    "bronze": "./lib/cli.js"
+    "bronze": "./build/commonjs/src/lib/cli.js"
   },
   "bugs": {
     "email": "team@altusaero.com",
     "url": "https://github.com/altusaero/bronze/issues"
   },
-  "contributors": [
-    "Daniel Bankhead <dan@danielbankhead.com> (https://danielbankhead.com/)"
-  ],
   "dependencies": {},
   "description": "Collision-resistant ids for distributed systems",
   "devDependencies": {
-    "coveralls": "^2.12.0",
-    "nsp": "^2.6.3",
-    "nyc": "^11.0.3",
-    "pre-commit": "^1.2.2",
-    "standard": "^10.0.2",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.7.0",
-    "webpack": "^3.1.0"
+    "@types/node": "^10.9.4",
+    "coveralls": "^3.0.2",
+    "nyc": "^13.0.1",
+    "standard": "^12.0.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.0.3"
   },
   "engines": {
-    "node": ">=6.0.0",
-    "npm": ">=4.0.0"
+    "node": ">=8.0.0",
+    "npm": ">=5.10.0"
   },
   "homepage": "https://github.com/altusaero/bronze",
   "keywords": [
@@ -42,7 +40,7 @@
     "uwp"
   ],
   "license": "Apache-2.0",
-  "main": "index.js",
+  "main": "./build/commonjs/src/lib/bronze-node.js",
   "name": "bronze",
   "nyc": {
     "branches": 100,
@@ -54,27 +52,22 @@
     ],
     "statements": 100
   },
-  "pre-commit": {
-    "run": [
-      "test"
-    ],
-    "silent": false
-  },
   "preferGlobal": false,
   "private": false,
+  "publishConfig": {
+    "tag": "latest"
+  },
   "repository": "altusaero/bronze",
   "scripts": {
-    "build": "webpack index.js build/Release/bundle.js",
+    "build": "tsc && tsc -p tsconfig.esm.json",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "standard",
-    "nsp": "nsp check",
+    "lint": "tslint --project . && tslint --project tsconfig.esm.json",
     "postversion": "git push && git push --tags",
-    "preversion": "node dev/changelog-preversion",
+    "prepublishOnly": "npm run build",
     "start": "node .",
     "tape": "tape test/*.js | tap-spec",
-    "test": "npm run nsp && npm run lint && npm run build && nyc --check-coverage --show-process-tree npm run tape",
-    "version": "node dev/changelog-version"
+    "test": "npm audit && npm run lint && npm run build"
   },
-  "standard": {},
+  "types": "./build/commonjs/src/lib/bronze-node.d.ts",
   "version": "1.4.0"
 }

@@ -3,7 +3,7 @@
 
 const Bronze = require('../')
 const cli = require('../lib/cli')
-const config = require('../data/test/config')
+const config = require('./.config')
 const packageInfo = require('../package')
 const tape = require('tape')
 
@@ -14,8 +14,8 @@ const path = require('path')
 
 const cliPath = path.join(__dirname, '..', 'lib', 'cli.js')
 const defaultName = process.env.HOSTNAME || 'localhost'
-const defaultSequencePath = path._makeLong(path.join(os.homedir(), '.bronze', 'sequence'))
-const nonDefaultSequenceDir = path._makeLong(path.join(os.homedir(), '.foo'))
+const defaultSequencePath = path.join(os.homedir(), '.bronze', 'sequence')
+const nonDefaultSequenceDir = path.join(os.homedir(), '.foo')
 const nonDefaultSequencePath = path.join(nonDefaultSequenceDir, 'sequence')
 const nonDefaultSequenceBadDir = nonDefaultSequencePath
 const nonDefaultSequenceDeepDir = path.join(nonDefaultSequenceDir, 'baz', 'cat', 'dog')
@@ -83,26 +83,22 @@ tape('cli', (t) => {
   t.equal(cli.output = outputFunction, outputFunction, `setting cli.output should return the output function`)
   t.equal(cli.output, outputFunction, `setting cli.output should update cli.output`)
 
-  for (let i = 0, len = helpTextLines.length; i < len; i++) {
-    if (helpTextLines[i].length > 80) {
+  for (const helpTextLine of helpTextLines) {
+    if (helpTextLine.length > 80) {
       helpWidthGreaterThan80 = true
     }
   }
 
   t.equal(helpWidthGreaterThan80, false, 'Help text\'s width shouldn\'t be greater than 80 chars')
 
-  for (let i = 0; i < config.cli.helpCommands.length; i++) {
-    const helpCommand = config.cli.helpCommands[i]
-
+  for (const helpCommand of config.cli.helpCommands) {
     t.equal(runCLICommand(...helpCommand), helpText, `\`${helpCommand.join(' ')}\` should be a \`--help\` command`)
   }
 
   t.equal(helpText.includes(defaultSequencePath), true, '`--help` should contain default sequence path')
   t.equal(helpText.includes(packageInfo.license), true, '`--help` should contain license from package.json')
 
-  for (let i = 0; i < config.cli.listSpecsCommands.length; i++) {
-    const listSpecsCommand = config.cli.listSpecsCommands[i]
-
+  for (const listSpecsCommand of config.cli.listSpecsCommands) {
     t.equal(runCLICommand(...listSpecsCommand), listSpecsText, `\`${listSpecsCommand.join(' ')}\` should be a \`--list-specs\` command`)
   }
 
@@ -110,9 +106,7 @@ tape('cli', (t) => {
   t.equal(listSpecsText.includes('\n') === false && listSpecsText.includes(' '), true, 'specs in `--list-specs` should be listed space-seperated')
   t.deepEqual(listSpecsText.split(' '), config.specs, '`--list-specs` should only countain valid specs')
 
-  for (let i = 0; i < config.cli.listSpecsCommands.length; i++) {
-    const versionCommand = config.cli.versionCommands[i]
-
+  for (const versionCommand of config.cli.listSpecsCommands) {
     t.equal(runCLICommand(...versionCommand), versionText, `\`${versionCommand.join(' ')}\` should be a \`--version\` command`)
   }
 
@@ -204,8 +198,8 @@ tape('cli', (t) => {
   t.equal(fs.readFileSync(path.join(nonDefaultSequenceDeepDir, 'sequence')).toString().trim(), '1', `\`--sequence-dir\` should handle multiple levels of depth`)
 
   deleteSequencePath(path.join(nonDefaultSequenceDeepDir, 'sequence'))
-  for (let i = 0, len = nonDefaultSequenceDeepDirRollback.length; i < len; i++) {
-    fs.rmdirSync(nonDefaultSequenceDeepDirRollback[i])
+  for (const nonDefaultSequenceDeepDirRollbackPath of nonDefaultSequenceDeepDirRollback) {
+    fs.rmdirSync(nonDefaultSequenceDeepDirRollbackPath)
   }
 
   runCLICommand(`--sequence-dir=${nonDefaultSequenceDir}`)

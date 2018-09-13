@@ -1,0 +1,9 @@
+{
+  "extends": "tslint-config-standard",
+  "rules": {
+    "object-curly-spacing": false
+  },
+  "linterOptions": {
+    "exclude": ["**/*.json"]
+  }
+}

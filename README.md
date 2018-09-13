@@ -7,8 +7,8 @@
 [shield-io-npm-version]: https://img.shields.io/npm/v/bronze.svg?style=flat-square
 [shield-io-npm-total-downloads]: https://img.shields.io/npm/dt/bronze.svg?style=flat-square
 [shield-io-npm-license]: https://img.shields.io/npm/l/bronze.svg?style=flat-square
-[shield-io-AppVeyor]: https://img.shields.io/appveyor/ci/DanielBankhead/bronze.svg?style=flat-square&label=appveyor
-[shield-io-Travis-CI]: https://img.shields.io/travis/AltusAero/bronze.svg?style=flat-square&label=travis
+[shield-io-AppVeyor]: https://img.shields.io/appveyor/ci/DanielBankhead/bronze/master.svg?style=flat-square&label=appveyor
+[shield-io-Travis-CI]: https://img.shields.io/travis/AltusAero/bronze/master.svg?style=flat-square&label=travis
 [shield-io-Coveralls]: https://img.shields.io/coveralls/AltusAero/bronze.svg?style=flat-square
 [shield-io-GitHub-Issues-Open]: https://img.shields.io/github/issues-raw/altusaero/bronze.svg?style=flat-square
 [shield-io-GitHub-Pull-Requests-Open]: https://img.shields.io/github/issues-pr-raw/altusaero/bronze.svg?style=flat-square
